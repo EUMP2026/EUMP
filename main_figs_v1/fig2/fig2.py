@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pickle
 import matplotlib.pyplot as plt
@@ -8,6 +9,8 @@ from sklearn.metrics import r2_score
 from skimage.metrics import structural_similarity as ssim
 from matplotlib.cm import ScalarMappable
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 class RemapNumpyUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
         # Map NumPy 2.x internal path back to 1.x
@@ -15,7 +18,6 @@ class RemapNumpyUnpickler(pickle.Unpickler):
             module = module.replace("numpy._core", "numpy.core", 1)
         return super().find_class(module, name)
 
-#%%
 # -------- config --------
 VMIN = 295
 VMAX = 315
@@ -54,7 +56,6 @@ with open("scatter_plot_data_v4.pkl", "rb") as f:
     scatter = RemapNumpyUnpickler(f).load()
 
 # city id list and selected
-# city_id_list = [20, 1059, 221, 1009, 5, 168, 423, 51, 94, 785, 495, 216, 782, 968, 652, 339, 548, 475, 5, 142, 261]
 test_city_id_list = [72, 568, 211, 59, 183, 446, 79, 495, 216]
 selected_cities = [446, 59, 79]
 selected_citie_names = ['Tirana (Albania)','Spokane (USA)','Tegucigalpa (Honduras)']
@@ -70,22 +71,9 @@ for i in sel_idx:
     vals = vals[~np.isnan(vals)]
     all_vals.append(vals)
 
-# 合并成一个一维数组
 all_vals = np.concatenate(all_vals)
 
-# 绘制直方图
-# plt.figure(figsize=(8, 5))
-# plt.hist(all_vals, bins=100, color='skyblue', edgecolor='black', alpha=0.7)
-# plt.title('Histogram of All Values (gt + hand + embd)')
-# plt.xlabel('Value')
-# plt.ylabel('Frequency')
-# plt.grid(True, linestyle='--', alpha=0.5)
-# plt.tight_layout()
-# plt.show()
-# exit(0)
-
 # -------- figure layout --------
-# 修改 GridSpec 为 6 行 5 列，最后一列用于 color bar
 fig = plt.figure(figsize=(15 / 2.54, 20 / 2.54), dpi=600)
 gs = GridSpec(5, 4, figure=fig, 
               height_ratios=[1, 1, 0.05, 1, 1],
@@ -94,7 +82,6 @@ gs = GridSpec(5, 4, figure=fig,
 
 # keys/titles for scatter (keep same order)
 keys = ['lst_embd', 'precip_embd', 'congestion_embd', 'lst_hand', 'precip_hand', 'congestion_hand']
-# titles = ['a: LST EUMP', 'b: UHI EUMP', 'c: Precip EUMP', 'd: Congestion EUMP', 'e: LST hand', 'f: UHI hand', 'g: Precip hand', 'h: Congestion hand']
 titles = ['LST_EUMP', 'Precip_EUMP', 'TCI_EUMP', 'LST_hand', 'Precip_hand', 'TCI_hand']
 
 # -------- top: 2x4 scatter plots --------
@@ -149,7 +136,7 @@ for i, (k, t) in enumerate(zip(keys, titles)):
 row_names = ['Observed', 'Predicted']
 for r in range(2):
     for c, idx in enumerate(sel_idx):
-        ax = fig.add_subplot(gs[3 + r, c])  # 图像只占前4列（c=0~3）
+        ax = fig.add_subplot(gs[3 + r, c])
         if r == 0:
             img = gt_all[idx]
         else:
@@ -175,19 +162,12 @@ for r in range(2):
             gt_img = gt_all[idx].astype(float)
             pred_img = img.astype(float)
 
-            # ssim for 2D arrays; data_range from actual vmax-vmin
-            # dr = float(np.nanmax(gt_img) - np.nanmin(gt_img)) or 1.0
-            # s = ssim(gt_img, pred_img, data_range=dr)
-            # ax.text(0.02, 0.96, f"SSIM={s:.3f}", transform=ax.transAxes, fontsize=6,
-            #         color='white', ha='left', va='top', bbox=dict(facecolor='black', alpha=0.45, pad=1))
 
 # -------- add shared color bar for image panels --------
-# 创建一个与图像使用相同归一化和 colormap 的 ScalarMappable（不实际绘图）
 norm = plt.Normalize(vmin=VMIN, vmax=VMAX)
 sm = ScalarMappable(norm=norm, cmap=plt.get_cmap(SC_CMAP))
 sm.set_array([])
 
-# 在 GridSpec 最后一列（第5列，索引-1），从第3行到底部添加 colorbar
 cax = fig.add_subplot(gs[-1:, -1])
 cbar = fig.colorbar(sm, cax=cax, ticks=np.linspace(VMIN, VMAX, 5))
 cbar.set_ticks(np.arange(VMIN,VMAX+5,5), labels=np.arange(VMIN,VMAX+5,5))
@@ -195,17 +175,17 @@ cbar.ax.tick_params(labelsize=5)
 
 # Add custom text on the top of colorbar
 cax.text(
-    2, 1.05,               # (x, y) in normalized axis coordinates
-    'LST (K)',               # text string
-    transform=cax.transAxes, # coordinate system relative to cax
+    2, 1.05,
+    'LST (K)',
+    transform=cax.transAxes,
     ha='center', va='bottom',
     fontsize=7,
-    fontweight='bold'         # <-- make it bold
+    fontweight='bold'
 )
 
 # -------- add panel labels --------
-fig.text(0.08, 0.88, 'a', fontsize=9, fontweight='bold', ha='left', va='top')  # for scatter panels (upper block)
-fig.text(0.08, 0.47, 'b', fontsize=9, fontweight='bold', ha='left', va='top')  # for image panels (lower block)
+fig.text(0.08, 0.88, 'a', fontsize=9, fontweight='bold', ha='left', va='top')
+fig.text(0.08, 0.47, 'b', fontsize=9, fontweight='bold', ha='left', va='top')
 
 # Save
 out = "fig2.png"

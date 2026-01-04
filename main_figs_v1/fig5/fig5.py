@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -19,6 +18,8 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from matplotlib import cm, colors
 from scipy.stats import linregress, t
 import cartopy.crs as ccrs
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # --- Setup ---
 CURRENT_DIR = os.getcwd()
@@ -283,10 +284,6 @@ def plot_scatter_with_ols(
     ci_upper = yy + t_val * se_line
     ci_lower = yy - t_val * se_line
 
-    # ax.scatter(x, y, s=MARKER["size"], alpha=MARKER["alpha"], edgecolor="none", color="tab:blue")
-    # ax.plot(xx, yy, lw=1.5, color="#E74C3C", label="OLS fit")
-    # ax.fill_between(xx, ci_lower, ci_upper, color="#E74C3C", alpha=0.2, label=f"{int(ci*100)}% CI")
-    
     ax.scatter(
         x, y,
         s=MARKER["size"] * 2,           # make markers larger
@@ -319,16 +316,12 @@ def plot_scatter_with_ols(
         transform=ax.transAxes,
         va="top",
         ha="right",
-        # bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="0.7", alpha=0.9),
     )
 
     ax.set_xlabel(xlabel, fontsize=FONT["label"])
     if ylabel_on:
         ax.set_ylabel(ylabel, fontsize=FONT["label"])
     ax.tick_params(labelsize=FONT["tick"])
-    # ax.legend(loc="upper right", fontsize=FONT["tick"], frameon=True, facecolor="white", edgecolor="gray", framealpha=0.6)
-    # ax.grid(True, ls=":", lw=0.5)
-
 
 # --- Main Figure ---
 def plot_with_csv(save_path: str = "./fig4.png"):
@@ -354,8 +347,6 @@ def plot_with_csv(save_path: str = "./fig4.png"):
         vmax=0,
         cmap=blue_cmap,
     )
-    # add_gridlabels_only(ax1)
-    # ax1.set_aspect('auto')
     ax1.set_extent([-180, 180, -70, 70], crs=ccrs.PlateCarree())
     ax1.text(0.02, 0.98, "a", transform=ax1.transAxes, fontsize=FONT["title"], fontweight="bold", va="top", ha="left")
 
@@ -363,9 +354,6 @@ def plot_with_csv(save_path: str = "./fig4.png"):
     x1 = merged_gdf["IMERG_mean"] / 1000
     y1 = merged_gdf["sensitivity_cooling"]
     
-    # bins1 = np.array([0, 1000, 2000, 3000, 4000, 5000]) / 1000
-    # labels1 = [f"{int(bins1[i])}-{int(bins1[i+1])}" for i in range(len(bins1) - 1)]
-    # create_binned_boxplot(ax2, x1, y1, bins1, labels1, "Precipitation ($10^3$ mm)", "Sensitivity", y_filter_threshold=-5)
 
     bins1 = np.array([0, 500, 1000, 1500, 2000, 5000])/1000
     labels1 = [f"{int(bins1[i]*1000)}-{int(bins1[i+1]*1000)}" for i in range(len(bins1) - 2)]
@@ -399,7 +387,6 @@ def plot_with_csv(save_path: str = "./fig4.png"):
 if __name__ == "__main__":
     plot_with_csv(save_path="./fig5.png")
     
-#%%
 merged_gdf = load_and_merge_data()
 plt.hist(merged_gdf['sensitivity_cooling'].values,bins=100)
 plt.show()

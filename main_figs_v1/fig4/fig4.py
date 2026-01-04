@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import pickle, sys, types
 from typing import List, Tuple, Dict, Any
@@ -13,6 +14,8 @@ import matplotlib.ticker as ticker
 from matplotlib.patches import FancyBboxPatch
 
 from scipy.signal import savgol_filter
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 class RemapNumpyUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
@@ -347,15 +350,12 @@ def plot_trajectory_row(axes, traj_items, target_cooling_list):
             
         # --- Manage y-axis ticks and labels ---
         if j == 0:
-            # ✅ First panel: keep left y-axis label/ticks, hide right
             ax2.set_ylabel("")  # remove right label
             ax2.tick_params(axis="y", labelright=False, right=False)
         elif j == len(axes) - 1:
-            # ✅ Last panel: keep right y-axis label/ticks, hide left
             ax.set_ylabel("")  # remove left label
             ax.tick_params(axis="y", labelleft=False, left=False)
         else:
-            # ✅ Middle panels: hide both y-axis labels and ticks
             ax.set_ylabel("")
             ax2.set_ylabel("")
             ax.tick_params(axis="y", labelleft=False, left=False)
@@ -394,7 +394,6 @@ def make_combined_figure(data: List[Dict[str, Any]], traj_data: List[Dict[str, A
 
     fig = plt.figure(figsize=(16 / 2.54, 21 / 2.54))
 
-    # 定义高度比例，插入间隔 (Gap)
     gap_size = 0.15
     height_ratios = [1, gap_size, 1, 1, gap_size, 1, 1, 1]
     
@@ -406,7 +405,6 @@ def make_combined_figure(data: List[Dict[str, Any]], traj_data: List[Dict[str, A
     gs_traj = GridSpec(nrows=1, ncols=n_cities, figure=fig,
                        left=0.02, right=0.92, top=0.15, bottom=0, hspace=0.02, wspace=0.04)
 
-    # 建立逻辑行到物理行的映射
     row_map = [0, 2, 3, 5, 6, 7]
 
     axes_main = np.array([[fig.add_subplot(gs_main[row_map[p], c]) for p in range(n_panels)] for c in range(n_cities)])

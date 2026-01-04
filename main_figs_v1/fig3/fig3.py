@@ -17,6 +17,8 @@ import cartopy.feature as cfeature
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 # ------------------ USER CONFIG ------------------
 DATA = {
     'corr_matrix': './corr_matrix.npy',
@@ -34,29 +36,29 @@ FONT = {'title': 7, 'label': 6, 'tick': 5, 'legend': 5}
 OUT_PNG = './fig3.png'
 
 # Colormap for Heatmap
-COLOR_SCHEME = 1  # <--- 在这里修改数字切换方案 (1 或 2)
+COLOR_SCHEME = 1  # 1 or 2
 
 if COLOR_SCHEME == 1:
-    # 方案 A: 青橙配色 (Teal-Orange 风格)
+    # A: Teal-Orange
     CMAP_HEAT = LinearSegmentedColormap.from_list(
         'teal_orange_discrete',
         ['#249c98', '#e0e0e0', '#f0785b'],
         N=12 
     )
 elif COLOR_SCHEME == 2:
-    # 方案 B: 光谱配色 (Spectral Style)
+    # B: Spectral Style
     colors_spectral = [
-        '#9e0142', # 深红 (-1)
-        '#d53e4f', # 红
-        '#f46d43', # 橙
-        '#fdae61', # 黄橙
-        '#fee08b', # 淡黄
-        '#ffffbf', # 米白 (接近 0)
-        '#e6f598', # 淡绿
-        '#abdda4', # 绿
-        '#66c2a5', # 青绿
-        '#3288bd', # 蓝
-        '#5e4fa2'  # 深紫蓝 (1)
+        '#9e0142',
+        '#d53e4f',
+        '#f46d43',
+        '#fdae61',
+        '#fee08b',
+        '#ffffbf',
+        '#e6f598',
+        '#abdda4',
+        '#66c2a5',
+        '#3288bd',
+        '#5e4fa2'
     ]
     CMAP_HEAT = LinearSegmentedColormap.from_list(
         'spectral_custom',
@@ -64,7 +66,6 @@ elif COLOR_SCHEME == 2:
         N=12
     )
 else:
-    # 默认回退
     CMAP_HEAT = LinearSegmentedColormap.from_list(
         'teal_orange',
         ['#249c98', '#e0e0e0', '#f0785b']
@@ -244,17 +245,14 @@ def make_combined_figure():
             num = re.findall(r'\d+', lbl)
             clean_labels.append(f"{int(num[0])}" if num else lbl)
             
-        # [修改] 调整 legend:
-        # 1. frameon=False (无边框)
-        # 2. bbox_to_anchor (微调位置，避免和外边框 overlap)
         ax.legend(
             handles[:5], clean_labels[:5],
             title="Clusters",
             loc="lower left",
             fontsize=FONT['legend'],
             title_fontsize=FONT['legend'],
-            frameon=False,               # 修改点1: 去掉边框
-            bbox_to_anchor=(0.1, 0.02), # 修改点2: 向内偏移，避免压住边框线
+            frameon=False,
+            bbox_to_anchor=(0.1, 0.02),
             borderaxespad=0
         )
         
