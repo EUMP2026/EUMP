@@ -1,0 +1,1077 @@
+ID,UC_NM_MN,dn,climates_f
+1,Honolulu,32, 
+2,Oxnard,12,Csa
+3,San Jose,13,CSb
+4,Thousand Oaks,13,CSb
+5,Los Angeles,6,Bsk
+6,Concord,13,CSb
+7,Tijuana,6,Bsk
+8,Santa Clarita,13,CSb
+9,Antioch,13,CSb
+10,Bakersfield,5,BSh
+11,Palmdale,6,Bsk
+12,Stockton,12,Csa
+13,Modesto,12,Csa
+14,Temecula,6,Bsk
+15,Fresno,5,BSh
+16,Sacramento,12,Csa
+17,Indio,7,BWh
+18,Mexicali,7,BWh
+19,Hermosillo,7,BWh
+20,Reno,12,Csa
+21,Culiacán,5,BSh
+22,Las Vegas,7,BWh
+23,Phoenix,7,BWh
+24,Eugene,13,CSb
+25,Tucson,5,BSh
+26,Guadalajara,15,Cwa
+27,Salem,13,CSb
+28,Portland,13,CSb
+29,Chihuahua,5,BSh
+30,Aguascalientes,5,BSh
+31,Morelia,16,Cwb
+32,León,5,BSh
+33,Acapulco,4,AW
+34,Torreon,7,BWh
+35,Querétaro,5,BSh
+36,Seattle,13,CSb
+37,Ciudad Juárez,7,BWh
+38,San Luis Potosí,6,Bsk
+39,Toluca,16,Cwb
+40,Cuernavaca,5,BSh
+41,Mexico City,16,Cwb
+42,Victoria,13,CSb
+43,Boise,12,Csa
+44,Puebla,16,Cwb
+45,Saltillo,5,BSh
+46,Tlaxcala,16,Cwb
+47,Vancouver,10,Cfb
+48,Provo,9,Cfa
+49,Salt Lake City,9,Cfa
+50,Albuquerque,6,Bsk
+51,Monterrey,5,BSh
+52,Oaxaca,15,Cwa
+53,Ogden,9,Cfa
+54,Tampico,4,AW
+55,Veracruz,4,AW
+56,Nuevo Laredo,5,BSh
+57,Reynosa,5,BSh
+58,McAllen,5,BSh
+59,Spokane,13,CSb
+60,Matamoros,9,Cfa
+61,Lubbock,6,Bsk
+62,San Antonio,9,Cfa
+63,Corpus Christi,9,Cfa
+64,Villahermosa,2,Am
+65,Amarillo,6,Bsk
+66,Colorado Springs,6,Bsk
+67,Denver,6,Bsk
+68,Austin,9,Cfa
+69,Guatemala City,4,AW
+70,Killeen,9,Cfa
+71,Houston,9,Cfa
+72,San Salvador,4,AW
+73,Dallas,9,Cfa
+74,Beaumont,9,Cfa
+75,Port Arthur,9,Cfa
+76,San Pedro Sula,2,Am
+77,Oklahoma City,9,Cfa
+78,Mérida,4,AW
+79,Tegucigalpa,4,AW
+80,Calgary,19,Dfb
+81,Managua,4,AW
+82,Shreveport,9,Cfa
+83,Wichita,9,Cfa
+84,Tulsa,9,Cfa
+85,San José,1,Af
+86,Baton Rouge,9,Cfa
+87,New Orleans,9,Cfa
+88,Edmonton,19,Dfb
+89,Little Rock,9,Cfa
+90,Lincoln,18,Dfa
+91,Biloxi,9,Cfa
+92,Kansas City,9,Cfa
+93,Springfield,9,Cfa
+94,Omaha,18,Dfa
+95,Mobile,9,Cfa
+96,Guayaquil,4,AW
+97,Pensacola,9,Cfa
+98,Memphis,9,Cfa
+99,Bartlett,9,Cfa
+100,Navarre,9,Cfa
+101,Panama City,2,Am
+102,Saskatoon,19,Dfb
+103,Quito,10,Cfb
+104,Panama City,9,Cfa
+105,Havana,2,Am
+106,Des Moines,18,Dfa
+107,Montgomery,9,Cfa
+108,O’Fallon,9,Cfa
+109,Birmingham,9,Cfa
+110,St. Louis,9,Cfa
+111,Bradenton,9,Cfa
+112,Tampa,9,Cfa
+113,Cape Coral,4,AW
+114,Columbus,9,Cfa
+115,Fargo,19,Dfb
+116,Cali,1,Af
+117,Cedar Rapids,18,Dfa
+118,Springfield,9,Cfa
+119,Lima,7,BWh
+120,Nashville,9,Cfa
+121,Davenport,18,Dfa
+122,Evansville,9,Cfa
+123,Peoria,18,Dfa
+124,Eagan,18,Dfa
+125,Minneapolis [Saint Paul],18,Dfa
+126,Miami,2,Am
+127,Atlanta,9,Cfa
+128,Medellín,1,Af
+129,Orlando,9,Cfa
+130,Roswell,9,Cfa
+131,Cartagena,4,AW
+132,Palm Bay,9,Cfa
+133,Jacksonville,9,Cfa
+134,Stuart,0, 
+135,Kingston,1,Af
+136,Daytona Beach,9,Cfa
+137,Bogota,10,Cfb
+138,Louisville,9,Cfa
+139,Winnipeg,19,Dfb
+140,Barranquilla,4,AW
+141,Rockford,18,Dfa
+142,Chicago,18,Dfa
+143,Joliet,18,Dfa
+144,Madison,19,Dfb
+145,Indianapolis,9,Cfa
+146,Algonquin,18,Dfa
+147,Savannah,9,Cfa
+148,Waukegan,18,Dfa
+149,Lexington,9,Cfa
+150,Nassau,4,AW
+151,Milwaukee,18,Dfa
+152,Racine,18,Dfa
+153,Cincinnati,9,Cfa
+154,Columbia,9,Cfa
+155,South Bend,18,Dfa
+156,Appleton,19,Dfb
+157,Charleston,9,Cfa
+158,Elkhart,18,Dfa
+159,Dayton,9,Cfa
+160,Charlotte,9,Cfa
+161,Fort Wayne,18,Dfa
+162,Green Bay,19,Dfb
+163,Kalamazoo,18,Dfa
+164,Maracaibo,4,AW
+165,Grand Rapids,19,Dfb
+166,Columbus,9,Cfa
+167,Port-au-Prince,4,AW
+168,Greensboro,9,Cfa
+169,Lansing,19,Dfb
+170,Fayetteville,9,Cfa
+171,Arequipa,8,Bwk
+172,Toledo,18,Dfa
+173,Detroit,18,Dfa
+174,Raleigh,9,Cfa
+175,Flint,19,Dfb
+176,Barquisimeto,4,AW
+177,Canton,9,Cfa
+178,Cleveland,9,Cfa
+179,Akron,9,Cfa
+180,Santiago de los Caballeros,1,Af
+181,Willemstad,4,AW
+182,Santo Domingo,2,Am
+183,Youngstown,10,Cfb
+184,Pittsburgh,9,Cfa
+185,Valencia,4,AW
+186,Richmond,9,Cfa
+187,Maracay,4,AW
+188,London,19,Dfb
+189,Erie,10,Cfb
+190,Virginia Beach,9,Cfa
+191,El Alto [La Paz],31,ET
+192,Newport News,9,Cfa
+193,Washington D.C.,9,Cfa
+194,Dale City,9,Cfa
+195,Caracas,4,AW
+196,Kitchener,19,Dfb
+197,Toronto,19,Dfb
+198,Baltimore,9,Cfa
+199,La Serena,8,Bwk
+200,Harrisburg,9,Cfa
+201,Niagara Falls,19,Dfb
+202,Buffalo,19,Dfb
+203,Cochabamba,6,Bsk
+204,Philadelphia,9,Cfa
+205,Oshawa,19,Dfb
+206,Reading,9,Cfa
+207,Viña del Mar [Valparaíso],13,CSb
+208,Río Piedras [San Juan],1,Af
+209,Barcelona,4,AW
+210,Rochester,19,Dfb
+211,Allentown,9,Cfa
+212,Concepción,13,CSb
+213,Santiago,6,Bsk
+214,Trenton,9,Cfa
+215,Toms River,9,Cfa
+216,New York,9,Cfa
+217,Brick,9,Cfa
+218,Syracuse,19,Dfb
+219,Maturin,4,AW
+220,Mendoza,7,BWh
+221,Bridgeport,9,Cfa
+222,Santa Cruz de la Sierra,4,AW
+223,Albany,18,Dfa
+224,Port of Spain,2,Am
+225,Ottawa,19,Dfb
+226,San Miguel de Tucumán,15,Cwa
+227,Hartford,9,Cfa
+228,Springfield,9,Cfa
+229,Manaus,1,Af
+230,Providence,9,Cfa
+231,Worcester,19,Dfb
+232,Montreal,19,Dfb
+233,Boston,9,Cfa
+234,Cordoba,15,Cwa
+235,Quebec,19,Dfb
+236,Cuiabá,4,AW
+237,Rosario,9,Cfa
+238,Asuncion,9,Cfa
+239,Campo Grande,4,AW
+240,Buenos Aires,9,Cfa
+241,Halifax,19,Dfb
+242,La Plata,9,Cfa
+243,Ciudad del Este,9,Cfa
+244,Montevideo,9,Cfa
+245,Mar del Plata,10,Cfb
+246,Maringá,9,Cfa
+247,Londrina,9,Cfa
+248,Belém,1,Af
+249,Goiânia,4,AW
+250,Ceilândia,4,AW
+251,Novo Hamburgo,9,Cfa
+252,Porto Alegre,9,Cfa
+253,Uberlândia,4,AW
+254,Curitiba,10,Cfb
+255,Ribeirao Preto,4,AW
+256,Joinville,1,Af
+257,Florianópolis,9,Cfa
+258,Sorocaba,9,Cfa
+259,Campinas,4,AW
+260,Jundiaí,9,Cfa
+261,São Paulo,9,Cfa
+262,São Luís,3,As
+263,Praia Grande,2,Am
+264,Santos,2,Am
+265,Sao Jose dos Campos,9,Cfa
+266,Teresina,4,AW
+267,Belo Horizonte,4,AW
+268,Volta Redonda,4,AW
+269,Rio de Janeiro,4,AW
+270,Sao Goncalo,4,AW
+271,Vila Velha,4,AW
+272,Fortaleza,3,As
+273,Salvador,1,Af
+274,Aracaju,3,As
+275,Maceió,2,Am
+276,Natal,3,As
+277,Recife,2,Am
+278,João Pessoa,3,As
+279,Dakar,5,BSh
+280,Serrekunda,3,As
+281,Touba,5,BSh
+282,Nouakchott,7,BWh
+283,Las Palmas de Gran Canaria,6,Bsk
+284,Conakry,2,Am
+285,Freetown,2,Am
+286,Monrovia,2,Am
+287,Agadir,5,BSh
+288,Lisbon,12,Csa
+289,Bamako,4,AW
+290,Porto,13,CSb
+291,Casablanca,12,Csa
+292,Rabat,12,Csa
+293,Seville,12,Csa
+294,Tangier,12,Csa
+295,Dublin,10,Cfb
+296,Fez,12,Csa
+297,Belfast,10,Cfb
+298,Bobo-Dioulasso,4,AW
+299,Abidjan,4,AW
+300,Málaga,12,Csa
+301,Madrid,6,Bsk
+302,Glasgow,10,Cfb
+303,Bilbao,10,Cfb
+304,Cardiff,10,Cfb
+305,Edinburgh,10,Cfb
+306,Liverpool,10,Cfb
+307,Bristol,10,Cfb
+308,Takoradi [Sekondi-Takoradi],4,AW
+309,Manchester,10,Cfb
+310,Kumasi,4,AW
+311,Stoke-on-Trent,10,Cfb
+312,Ouagadougou,5,BSh
+313,Birmingham,10,Cfb
+314,Bournemouth,10,Cfb
+315,Huddersfield,10,Cfb
+316,Leeds,10,Cfb
+317,Nantes,10,Cfb
+318,Newcastle upon Tyne,10,Cfb
+319,Coventry,10,Cfb
+320,Southampton,10,Cfb
+321,Sheffield,10,Cfb
+322,Murcia,6,Bsk
+323,Middlesbrough,10,Cfb
+324,Nottingham,10,Cfb
+325,Portsmouth,10,Cfb
+326,Leicester,10,Cfb
+327,Zaragoza,6,Bsk
+328,Oran,5,BSh
+329,Bordeaux,10,Cfb
+330,Alacant / Alicante,5,BSh
+331,Accra,4,AW
+332,Valencia,5,BSh
+333,London,10,Cfb
+334,Brighton,10,Cfb
+335,Hull,10,Cfb
+336,Rouen,10,Cfb
+337,Toulouse,9,Cfa
+338,Lomé,4,AW
+339,Paris,10,Cfb
+340,Barcelona,12,Csa
+341,Niamey,5,BSh
+342,Palma de Mallorca,12,Csa
+343,Cotonou,4,AW
+344,Lille,10,Cfb
+345,Algiers,12,Csa
+346,Ghent,10,Cfb
+347,Rotterdam [The Hague],10,Cfb
+348,Lagos,4,AW
+349,Antwerp,10,Cfb
+350,Brussels,10,Cfb
+351,Abeokuta,4,AW
+352,Charleroi,10,Cfb
+353,Ikorodu,4,AW
+354,Amsterdam,10,Cfb
+355,Utrecht,10,Cfb
+356,Lyon,10,Cfb
+357,Ibadan,4,AW
+358,Eindhoven,10,Cfb
+359,Liège,10,Cfb
+360,Marseille,12,Csa
+361,Heerlen,10,Cfb
+362,Ilorin,4,AW
+363,Toulon,12,Csa
+364,Geneva,10,Cfb
+365,Dortmund,10,Cfb
+366,Dusseldorf,10,Cfb
+367,Cologne,10,Cfb
+368,Akure,4,AW
+369,Wuppertal,10,Cfb
+370,Bonn,10,Cfb
+371,Hagen,10,Cfb
+372,Benin City,2,Am
+373,Warri,2,Am
+374,Nice,12,Csa
+375,Constantine,12,Csa
+376,Basel,10,Cfb
+377,Strasbourg,10,Cfb
+378,Turin,9,Cfa
+379,Okene,4,AW
+380,Wiesbaden,10,Cfb
+381,Bremen,10,Cfb
+382,Karlsruhe,10,Cfb
+383,Mannheim,10,Cfb
+384,Frankfurt am Main,10,Cfb
+385,Zurich,10,Cfb
+386,Onitsha,4,AW
+387,Amaigbo,4,AW
+388,Oslo,19,Dfb
+389,Port Harcourt,2,Am
+390,Stuttgart,10,Cfb
+391,Hanover,10,Cfb
+392,Hamburg,10,Cfb
+393,Genoa,12,Csa
+394,Oboama Nguru,2,Am
+395,Milan,9,Cfa
+396,Abuja,4,AW
+397,Kaduna,4,AW
+398,Enugu,4,AW
+399,Bergamo,9,Cfa
+400,Gothenburg,10,Cfb
+401,Kano,4,AW
+402,Nuremberg,10,Cfb
+403,Augsburg,10,Cfb
+404,Copenhagen,10,Cfb
+405,Jos,4,AW
+406,Tunis,12,Csa
+407,Munich,10,Cfb
+408,Leipzig,10,Cfb
+409,Sousse,5,BSh
+410,Libreville,2,Am
+411,Sfax,7,BWh
+412,Douala,2,Am
+413,Berlin,10,Cfb
+414,Dresden,10,Cfb
+415,Rome,12,Csa
+416,Prague,10,Cfb
+417,Palermo,12,Csa
+418,Yaounde,4,AW
+419,Tripoli,5,BSh
+420,Stockholm,10,Cfb
+421,Naples,12,Csa
+422,Poznan,10,Cfb
+423,Vienna,10,Cfb
+424,Wroclaw,10,Cfb
+425,Zagreb,9,Cfa
+426,Maiduguri,5,BSh
+427,Luanda,5,BSh
+428,Catania,12,Csa
+429,Gdansk,10,Cfb
+430,Bratislava,10,Cfb
+431,Misrata,5,BSh
+432,Katowice,10,Cfb
+433,Lodz,10,Cfb
+434,Kaliningrad,10,Cfb
+435,N'Djamena,5,BSh
+436,Budapest,10,Cfb
+437,Krakow,10,Cfb
+438,Kinshasa,4,AW
+439,Brazzaville,4,AW
+440,Warsaw,10,Cfb
+441,Helsinki,19,Dfb
+442,Tallinn,19,Dfb
+443,Cape Town,12,Csa
+444,Riga,10,Cfb
+445,Belgrade,9,Cfa
+446,Tirana,12,Csa
+447,Kaunas,19,Dfb
+448,Skopje,9,Cfa
+449,Vilnius,19,Dfb
+450,Benghazi,5,BSh
+451,Lviv,19,Dfb
+452,Bangui,4,AW
+453,Sofia,9,Cfa
+454,Thessaloniki,12,Csa
+455,Saint Petersburg,19,Dfb
+456,Minsk,19,Dfb
+457,Athens,12,Csa
+458,Bucharest,9,Cfa
+459,Chișinău,9,Cfa
+460,Port Elizabeth,5,BSh
+461,Kyiv,19,Dfb
+462,Izmir,12,Csa
+463,Mbuji-Mayi,4,AW
+464,Istanbul,12,Csa
+465,Bloemfontein,6,Bsk
+466,Odesa,9,Cfa
+467,Bursa,12,Csa
+468,Tver,19,Dfb
+469,Bryansk,19,Dfb
+470,İzmit,9,Cfa
+471,Mykolaiv,19,Dfb
+472,Eskisehir,6,Bsk
+473,Kryvyi Rih,18,Dfa
+474,Evaton,16,Cwb
+475,Johannesburg,16,Cwb
+476,Moscow,19,Dfb
+477,Klipgat,5,BSh
+478,Pretoria,15,Cwa
+479,Antalya,12,Csa
+480,Yaroslavl,19,Dfb
+481,Tula,19,Dfb
+482,Alexandria,7,BWh
+483,Dnipro,18,Dfa
+484,Lubumbashi,15,Cwa
+485,Zaporizhzhia,9,Cfa
+486,Bulawayo,5,BSh
+487,Kharkiv,19,Dfb
+488,Sincan,6,Bsk
+489,Lusaka,15,Cwa
+490,Ankara,12,Csa
+491,Kitwe,15,Cwa
+492,Konya,6,Bsk
+493,Faiyum,7,BWh
+494,Durban,9,Cfa
+495,Cairo,7,BWh
+496,Banha,7,BWh
+497,Mansoura,7,BWh
+498,Dairut,7,BWh
+499,Al-Zaqaziq�?7,BWh,
+500,An Nazlah,7,BWh
+501,Lipetsk,19,Dfb
+502,Asyut,7,BWh
+503,Voronezh,19,Dfb
+504,Bujumbura,5,BSh
+505,Donetsk,18,Dfa
+506,Sohag,7,BWh
+507,Mariupol,9,Cfa
+508,Girga,7,BWh
+509,Balyana,7,BWh
+510,Harare,15,Cwa
+511,Kigali,4,AW
+512,Mersin,12,Csa
+513,Nizhny Novgorod,19,Dfb
+514,Luhansk,18,Dfa
+515,Kayseri,6,Bsk
+516,Maputo,4,AW
+517,Adana,12,Csa
+518,Qus,7,BWh
+519,Gaza,5,BSh
+520,Rostov-on-Don,9,Cfa
+521,Krasnodar,9,Cfa
+522,Tel Aviv,12,Csa
+523,Haifa,12,Csa
+524,Khartoum,7,BWh
+525,Beirut,12,Csa
+526,Jerusalem,12,Csa
+527,Irbid,12,Csa
+528,Damascus,6,Bsk
+529,Amman,12,Csa
+530,Aleppo,12,Csa
+531,Gaziantep,12,Csa
+532,Homs,12,Csa
+533,Kampala,1,Af
+534,Penza,19,Dfb
+535,Cheboksary,19,Dfb
+536,Mwanza,4,AW
+537,Lilongwe,15,Cwa
+538,Stavropol,19,Dfb
+539,Kazan,19,Dfb
+540,Saratov,18,Dfa
+541,Volgograd,18,Dfa
+542,Ulyanovsk,19,Dfb
+543,Tolyatti,19,Dfb
+544,Samara,19,Dfb
+545,Izhevsk,19,Dfb
+546,Naberezhnye Chelny,19,Dfb
+547,Arusha,15,Cwa
+548,Nairobi,10,Cfb
+549,Medina,7,BWh
+550,Tbilisi,9,Cfa
+551,Jeddah,7,BWh
+552,Yerevan,18,Dfa
+553,Mosul,5,BSh
+554,Perm,19,Dfb
+555,Astrakhan,6,Bsk
+556,Mecca,7,BWh
+557,Addis Ababa,16,Cwb
+558,Erbil,12,Csa
+559,At Taif,7,BWh
+560,Dar es Salaam,4,AW
+561,Urmia,6,Bsk
+562,Makhachkala,9,Cfa
+563,Kirkuk,5,BSh
+564,Baghdad,7,BWh
+565,Mombasa,3,As
+566,Karbala,7,BWh
+567,Ufa,19,Dfb
+568,Tabriz,6,Bsk
+569,Nizhny Tagil,19,Dfb
+570,Orenburg,18,Dfa
+571,Buraydah,7,BWh
+572,Khamis Mushait,8,Bwk
+573,Yekaterinburg,19,Dfb
+574,Kermanshah,12,Csa
+575,Baku,6,Bsk
+576,Magnitogorsk,19,Dfb
+577,Chelyabinsk,19,Dfb
+578,Aktobe,18,Dfa
+579,Sana'a,8,Bwk
+580,Basra,7,BWh
+581,Riyadh,7,BWh
+582,Kuwait City,7,BWh
+583,Ahwaz,7,BWh
+584,Tyumen,19,Dfb
+585,Tehran,6,Bsk
+586,Qom,7,BWh
+587,Antananarivo,16,Cwb
+588,Isfahan,8,Bwk
+589,Hofuf,7,BWh
+590,Dammam,7,BWh
+591,Al Khobar,7,BWh
+592,Manama,7,BWh
+593,Shiraz,12,Csa
+594,Doha,7,BWh
+595,Yazd,7,BWh
+596,Ashgabat,7,BWh
+597,Abu Dhabi,7,BWh
+598,Omsk,19,Dfb
+599,Dubai,7,BWh
+600,Mashhad,6,Bsk
+601,Kerman,8,Bwk
+602,Al Ain,7,BWh
+603,Nur-Sultan,19,Dfb
+604,Seeb,7,BWh
+605,Port Louis,32, 
+606,Qarshi,6,Bsk
+607,Samarkand,12,Csa
+608,Shymkent,12,Csa
+609,Tashkent,12,Csa
+610,Tomsk,19,Dfb
+611,Novosibirsk,19,Dfb
+612,Dushanbe,12,Csa
+613,Namangan,6,Bsk
+614,Kemerovo,19,Dfb
+615,Fergana,8,Bwk
+616,Barnaul,19,Dfb
+617,Andijan,6,Bsk
+618,Quetta,6,Bsk
+619,Kabul,6,Bsk
+620,Bishkek,18,Dfa
+621,Novokuznetsk,19,Dfb
+622,Karachi,7,BWh
+623,Almaty,6,Bsk
+624,Peshawar,5,BSh
+625,Swat City,9,Cfa
+626,Mardan,9,Cfa
+627,Hyderabad,7,BWh
+628,Krasnoyarsk,19,Dfb
+629,Rawalpindi [Islamabad],15,Cwa
+630,Multan,7,BWh
+631,Faisalabad,7,BWh
+632,Ghaseet pura69 RB,5,BSh
+633,Srinagar,9,Cfa
+634,Gujranwala,15,Cwa
+635,Lahore,5,BSh
+636,Sialkot,15,Cwa
+637,Jammu,15,Cwa
+638,Rajkot,5,BSh
+639,Amritsar,5,BSh
+640,Jodhpur,7,BWh
+641,Jalandhar,5,BSh
+642,Ahmedabad,5,BSh
+643,Ludhiana,5,BSh
+644,Udaipur,5,BSh
+645,Surat,3,As
+646,Vadodara,4,AW
+647,Chandigarh,15,Cwa
+648,Vasai-Virar,3,As
+649,Mumbai,2,Am
+650,Jaipur,5,BSh
+651,Panipat,5,BSh
+652,Delhi [New Delhi],5,BSh
+653,Nashik,4,AW
+654,Dehradun,15,Cwa
+655,Kota,5,BSh
+656,Pune,4,AW
+657,Ürümqi,6,Bsk
+658,Haridwar,15,Cwa
+659,Meerut,15,Cwa
+660,Indore,3,As
+661,Aligarh,5,BSh
+662,Moradabad,15,Cwa
+663,Agra,5,BSh
+664,Aurangabad,4,AW
+665,Gwalior,5,BSh
+666,Bareilly,15,Cwa
+667,Bhopal,3,As
+668,Mangaluru,2,Am
+669,Neeleshwaram,2,Am
+670,Payyanur,2,Am
+671,Kannur,2,Am
+672,Thalassery,2,Am
+673,Kozhikode,2,Am
+674,Kanpur,5,BSh
+675,Guruvayur,2,Am
+676,Malappuram,2,Am
+677,Lucknow,15,Cwa
+678,Thrissur,2,Am
+679,Irinjalakuda,2,Am
+680,Mysuru,4,AW
+681,Kochi,2,Am
+682,Alappuzha,2,Am
+683,Nagpur,4,AW
+684,Kollam,2,Am
+685,Jabalpur,3,As
+686,Ettumanoor,2,Am
+687,Hyderabad,4,AW
+688,Coimbatore,4,AW
+689,Bengaluru,4,AW
+690,Thiruvananthapuram,4,AW
+691,Tiruppur,5,BSh
+692,Faizabad,15,Cwa
+693,Irkutsk,27,Dwb
+694,Erode,5,BSh
+695,Prayagraj,15,Cwa
+696,Salem,4,AW
+697,Warangal,4,AW
+698,Madurai,4,AW
+699,Gorakhpur,15,Cwa
+700,Tiruchirappalli,4,AW
+701,Varanasi,12,Csa
+702,Durg,4,AW
+703,Vellore,4,AW
+704,Nibua Raiganj,15,Cwa
+705,Raipur,4,AW
+706,Kushinagar,15,Cwa
+707,Lauiyah Nandangarh,15,Cwa
+708,Kuchai Kot,15,Cwa
+709,Vijayawada,4,AW
+710,Chennai,4,AW
+711,Pokhariya,15,Cwa
+712,Nagapattinam,4,AW
+713,Kathmandu,15,Cwa
+714,Colombo,1,Af
+715,Ulan-Ude,6,Bsk
+716,Muzaffarpur,15,Cwa
+717,Patna,15,Cwa
+718,Kandy,1,Af
+719,Visakhapatnam,4,AW
+720,Begusarai,15,Cwa
+721,Rourkela,4,AW
+722,Ranchi,15,Cwa
+723,Dhanbad,15,Cwa
+724,Jamshedpur,4,AW
+725,Asansol,4,AW
+726,Bhubaneshwar,4,AW
+727,Chapainawabganj,4,AW
+728,Ulaanbaatar,6,Bsk
+729,Berhampore,4,AW
+730,Rajshahi,4,AW
+731,Tamluk,4,AW
+732,Naogaon,4,AW
+733,Kolkata,4,AW
+734,Bogura,4,AW
+735,Jaynagar Majilpur,4,AW
+736,Hatisala,4,AW
+737,Pabna,4,AW
+738,Sirajganj,4,AW
+739,Canning,4,AW
+740,Jamalpur,2,Am
+741,Tangail,4,AW
+742,Muktagacha,2,Am
+743,Khulna,4,AW
+744,Mymensingh,2,Am
+745,Manikgonj,4,AW
+746,Dhaka,4,AW
+747,Kishoreganj,2,Am
+748,Guwahati,15,Cwa
+749,Brahmanbaria,4,AW
+750,Homna,4,AW
+751,Kharupetia,4,AW
+752,Comilla,4,AW
+753,Lakshmipur,2,Am
+754,Dhing,4,AW
+755,Agartala,4,AW
+756,Sylhet,15,Cwa
+757,Tezpur,4,AW
+758,Chattogram,2,Am
+759,Imphal,15,Cwa
+760,Xining,6,Bsk
+761,Lanzhou,6,Bsk
+762,Yinchuan,8,Bwk
+763,Mandalay,5,BSh
+764,Baotou,6,Bsk
+765,Baoshan,15,Cwa
+766,Yangon,2,Am
+767,Hohhot,6,Bsk
+768,Chengdu,15,Cwa
+769,Mianyang,15,Cwa
+770,Banda Aceh,1,Af
+771,Baoji,6,Bsk
+772,Chiang Mai,4,AW
+773,Datong,6,Bsk
+774,Yibin,15,Cwa
+775,渭城�?6,Bsk,
+776,Kunming,16,Cwb
+777,Xi'an,6,Bsk
+778,Taiyuan,6,Bsk
+779,Qujing,16,Cwb
+780,Chongqing,9,Cfa
+781,Phuket,2,Am
+782,Beijing,6,Bsk
+783,Medan,1,Af
+784,Bangkok,4,AW
+785,Shijiazhuang,6,Bsk
+786,Chifeng,6,Bsk
+787,Shunyi,6,Bsk
+788,Baoding,6,Bsk
+789,Daqing,26,Dwa
+790,Changzhi,26,Dwa
+791,Chonburi,4,AW
+792,Langfang,6,Bsk
+793,Vientiane,4,AW
+794,Guiyang,15,Cwa
+795,Xingtai,6,Bsk
+796,Luoyang,6,Bsk
+797,Yongnian,6,Bsk
+798,Jiaozuo,6,Bsk
+799,Handan,6,Bsk
+800,Tianjin,6,Bsk
+801,Anyang,6,Bsk
+802,George Town,1,Af
+803,Bukit Mertajam,1,Af
+804,Padang,1,Af
+805,Xinxiang,6,Bsk
+806,Tangshan,26,Dwa
+807,Songyuan,26,Dwa
+808,Cangzhou,6,Bsk
+809,Zhengzhou,15,Cwa
+810,Binhai,6,Bsk
+811,中塘�?6,Bsk,
+812,Dezhou,6,Bsk
+813,Nanyang,15,Cwa
+814,Yuzhou,15,Cwa
+815,Ipoh,1,Af
+816,Pingdingshan,15,Cwa
+817,Puyang,6,Bsk
+818,Fuxin,26,Dwa
+819,Kaifeng,15,Cwa
+820,Harbin,26,Dwa
+821,Fancheng,9,Cfa
+822,Xuchang,15,Cwa
+823,Liaocheng,6,Bsk
+824,Hanoi,15,Cwa
+825,Kuala Lumpur,1,Af
+826,Yichang,15,Cwa
+827,Qinhuangdao,26,Dwa
+828,Pekanbaru,1,Af
+829,Jinzhou,26,Dwa
+830,Huludao,26,Dwa
+831,Luohe,15,Cwa
+832,Heze,15,Cwa
+833,Seremban,1,Af
+834,Kota Bharu,1,Af
+835,Jinan,15,Cwa
+836,Changchun,26,Dwa
+837,Thái Bình,15,Cwa
+838,Melaka City,1,Af
+839,Haiphong,15,Cwa
+840,Hegang,27,Dwb
+841,Jingzhou,9,Cfa
+842,Tai'an,15,Cwa
+843,Shangqiu,15,Cwa
+844,东营�?15,Cwa,
+845,Shenyang,26,Dwa
+846,Jining,15,Cwa
+847,Changde,9,Cfa
+848,Zibo,15,Cwa
+849,Jiamusi,26,Dwa
+850,Nanning,15,Cwa
+851,Laiwu,15,Cwa
+852,临淄�?15,Cwa,
+853,Zoucheng,15,Cwa
+854,Fushun,26,Dwa
+855,Anshan,26,Dwa
+856,Jilin,26,Dwa
+857,Bayuquan,26,Dwa
+858,Liuzhou,9,Cfa
+859,Qingzhou,15,Cwa
+860,Tengzhou,15,Cwa
+861,Linqu,15,Cwa
+862,Phnom Penh,4,AW
+863,Jambi,1,Af
+864,Guilin,9,Cfa
+865,Singapore,1,Af
+866,Weifang,15,Cwa
+867,Fuyang,15,Cwa
+868,Yueyang,9,Cfa
+869,Dalian,26,Dwa
+870,市中�?15,Cwa,
+871,Batam City,1,Af
+872,Wuhan,9,Cfa
+873,Huaibei,15,Cwa
+874,Xuzhou,15,Cwa
+875,Hong Ngu,4,AW
+876,Linyi,15,Cwa
+877,Beihai,15,Cwa
+878,Long Xuyen,4,AW
+879,Changsha,9,Cfa
+880,Khabarovsk,27,Dwb
+881,Perth,12,Csa
+882,Palembang,1,Af
+883,Xiangtan,9,Cfa
+884,Gaomi,15,Cwa
+885,Can Tho,4,AW
+886,Sa Dec City,4,AW
+887,Yulin,9,Cfa
+888,Zhuzhou,9,Cfa
+889,Hengyang,9,Cfa
+890,Yantai,15,Cwa
+891,Mudanjiang,26,Dwa
+892,Jiaozhou,15,Cwa
+893,Bandar Lampung,1,Af
+894,Tianjia‘an,9,Cfa
+895,Huangshi,9,Cfa
+896,Rizhao,15,Cwa
+897,Dandong,26,Dwa
+898,Bengbu,15,Cwa
+899,My Tho,4,AW
+900,Qingdao,15,Cwa
+901,珠海街道,15,Cwa
+902,Suqian,15,Cwa
+903,Huangdao,15,Cwa
+904,Ho Chi Minh City,4,AW
+905,Đà Nẵng,2,Am
+906,Pingxiang,9,Cfa
+907,Cilegon,1,Af
+908,Zhanjiang,15,Cwa
+909,Jakarta,1,Af
+910,Hefei,9,Cfa
+911,Maoming,15,Cwa
+912,Sanya,4,AW
+913,Haikou,4,AW
+914,Huai'an,15,Cwa
+915,Jiujiang,9,Cfa
+916,Nanchang,9,Cfa
+917,Zhaoqing,9,Cfa
+918,Qingyuan,9,Cfa
+919,Bandung,1,Af
+920,Purwakarta,2,Am
+921,Luhe,9,Cfa
+922,Pukou,9,Cfa
+923,三水�?9,Cfa,
+924,Tongling,9,Cfa
+925,Nanjing,9,Cfa
+926,Ma'anshan,9,Cfa
+927,Guangzhou,15,Cwa
+928,Wuhu,9,Cfa
+929,Garut,2,Am
+930,花都�?9,Cfa,
+931,Yancheng,9,Cfa
+932,Pyongyang,26,Dwa
+933,Yangzhou,9,Cfa
+934,Tasikmalaya,1,Af
+935,Ganzhou,9,Cfa
+936,Taizhou,9,Cfa
+937,Cirebon,2,Am
+938,Zhongshan,15,Cwa
+939,Kuningan,2,Am
+940,Yangzhong,9,Cfa
+941,Zhuhai,15,Cwa
+942,Changzhou,9,Cfa
+943,Vladivostok,27,Dwb
+944,Tegal,2,Am
+945,Cilacap,1,Af
+946,Hong Kong,15,Cwa
+947,Jiangyin,9,Cfa
+948,Huizhou,15,Cwa
+949,Binangun,1,Af
+950,Purwokerto,1,Af
+951,Sha Tin,15,Cwa
+952,Suzhou,9,Cfa
+953,Zhangjiagang,9,Cfa
+954,惠阳�?15,Cwa,
+955,Nantong,9,Cfa
+956,Pekalongan,2,Am
+957,Changshu,9,Cfa
+958,Pontianak,1,Af
+959,Wonosobo,1,Af
+960,Quzhou,9,Cfa
+961,Temanggung,1,Af
+962,Semarang,2,Am
+963,Hangzhou,9,Cfa
+964,Meizhou,9,Cfa
+965,Seoul,15,Cwa
+966,Yogyakarta,2,Am
+967,Magelang,2,Am
+968,Shanghai,9,Cfa
+969,Shengze,9,Cfa
+970,Jiaxing,9,Cfa
+971,Jinhua,9,Cfa
+972,Jieyang,9,Cfa
+973,Pati,2,Am
+974,Yiwu,9,Cfa
+975,Kuching,1,Af
+976,Cixi,9,Cfa
+977,Cheonan-si,15,Cwa
+978,Madiun,2,Am
+979,Zhangzhou,9,Cfa
+980,Trenggalek,2,Am
+981,Longhai,9,Cfa
+982,Ningbo,9,Cfa
+983,Xiamen,9,Cfa
+984,Tulungagung,2,Am
+985,Daejeon,15,Cwa
+986,Gembongan,2,Am
+987,Kediri,2,Am
+988,Kertosono,2,Am
+989,Xianyou,9,Cfa
+990,Blitar,2,Am
+991,Kunjang,2,Am
+992,Fuzhou,9,Cfa
+993,Pare,2,Am
+994,Quanzhou,9,Cfa
+995,Jombang,2,Am
+996,Wenzhou,9,Cfa
+997,Putian,9,Cfa
+998,Hui'an,9,Cfa
+999,龙港�?9,Cfa,
+1000,Changle,9,Cfa
+1001,Mojokerto,4,AW
+1002,Yueqing,9,Cfa
+1003,Surabaya,2,Am
+1004,Gwangju,9,Cfa
+1005,Taizhou,9,Cfa
+1006,Lumajang,2,Am
+1007,Probolinggo,2,Am
+1008,Jember,2,Am
+1009,Daegu,15,Cwa
+1010,Pohang-si,9,Cfa
+1011,Changwon,15,Cwa
+1012,Busan,15,Cwa
+1013,Ulsan,15,Cwa
+1014,Zhanghua City,15,Cwa
+1015,Hsinchu,9,Cfa
+1016,Taichung,15,Cwa
+1017,New Taipei [Taipei],9,Cfa
+1018,Yuanlin City,15,Cwa
+1019,Tainan,4,AW
+1020,Denpasar,2,Am
+1021,Kaohsiung,4,AW
+1022,Banjarmasin,1,Af
+1023,Mataram,4,AW
+1024,Selong,4,AW
+1025,Kota Kinabalu,1,Af
+1026,Sapporo,19,Dfb
+1027,Fukuoka,9,Cfa
+1028,Kitakyushu,9,Cfa
+1029,Balikpapan,1,Af
+1030,Samarinda,1,Af
+1031,Kumamoto,9,Cfa
+1032,Dagupan,2,Am
+1033,Hiroshima,9,Cfa
+1034,Ōita,9,Cfa
+1035,Angeles [San Fernando],4,AW
+1036,Kagoshima,9,Cfa
+1037,Matsuyama,9,Cfa
+1038,Quezon City [Manila],2,Am
+1039,Okayama,9,Cfa
+1040,Niihama,9,Cfa
+1041,Sakaide,9,Cfa
+1042,Takamatsu,9,Cfa
+1043,Osaka [Kyoto],9,Cfa
+1044,Makassar,2,Am
+1045,Kanazawa,9,Cfa
+1046,Tokushima,9,Cfa
+1047,Naha,32, 
+1048,Moriyama [Otsu],9,Cfa
+1049,Niigata,9,Cfa
+1050,Kinokawa [Wakayama],9,Cfa
+1051,Nagoya,9,Cfa
+1052,Sendai,9,Cfa
+1053,Takasaki [Maebashi],9,Cfa
+1054,Toyohashi,9,Cfa
+1055,Kai [Kofu],9,Cfa
+1056,Hamamatsu,9,Cfa
+1057,Tokyo,9,Cfa
+1058,Utsunomiya,9,Cfa
+1059,Fujieda,9,Cfa
+1060,Fuji,9,Cfa
+1061,Shizuoka,9,Cfa
+1062,Adelaide,12,Csa
+1063,Mishima,9,Cfa
+1064,Cebu City,1,Af
+1065,Mito,9,Cfa
+1066,Kisarazu,9,Cfa
+1067,Cagayan de Oro,1,Af
+1068,Melbourne,10,Cfb
+1069,Wollongong,9,Cfa
+1070,Sydney,9,Cfa
+1071,Newcastle,9,Cfa
+1072,Christchurch,10,Cfb
+1073,Gold Coast,9,Cfa
+1074,Brisbane,9,Cfa
+1075,Auckland,10,Cfb
+1076,Hillcrest,10,Cfb
