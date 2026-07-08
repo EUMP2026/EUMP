@@ -1,0 +1,50 @@
+city_scalar_cv:
+  target_name: PM25_mean
+  output_prefix: pm25_cv
+  folds: 5
+  fold_seed: 42
+  experiment_group: eump_pm25_cv
+  run_name: pm25_cv_mae_v3_seed42
+  fold_manifest_dir: null
+  embedding_cache_dir: null
+  target_pipeline: eump_full/mae_v3/pm25
+  embedding:
+    model_name: eump_full_mae_v3/pretrain
+    checkpoint_file: eump_reconstruction_best_checkpoint.pt
+    checkpoint_source: auto
+    pipeline: eump_full/mae_v3/pretrain
+    years:
+      - 2015
+      - 2019
+    batch_size: 64
+    workers_per_gpu: 4
+    torch_threads: 1
+    overwrite: false
+    overrides: []
+  models:
+    - name: swin_embed_head_128_d05
+      kind: swin_embedding_head
+      scalar_hidden_dim: 128
+      dropout: 0.5
+      lr: 1.0e-4
+      weight_decay: 1.0e-2
+      batch_size: 64
+      epochs: 80
+      loss: mae
+      selection_metric: val_loss
+    - name: scalar_mlp_128_d05
+      kind: launcher
+      mode: mlp-pm25
+      launch: eump_full/scalar_mlp
+      overrides:
+        - model.mlp_hidden_dims=[128]
+        - model.dropout=0.5
+        - downstream.feature_standardization=feature_cache_train_split
+    - name: aef_mlp_128_d05
+      kind: launcher
+      mode: aef-mlp-pm25
+      launch: eump_full/aef_mlp
+      overrides:
+        - model.mlp_hidden_dims=[128]
+        - model.dropout=0.5
+        - downstream.feature_standardization=none

@@ -1,0 +1,22 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/swin_downstream
+  - /pipeline/eump_full/_shared/target/scalar_traffic
+  - _self_
+
+experiment:
+  group: eump_full_architecture_v1_convnext_unet
+  name: traffic
+
+downstream:
+  lr: 1e-4
+  batch_size: 128
+  encoder_model_name: eump_full_architecture_v1_convnext_unet/pretrain
+
+model:
+  scalar_hidden_dim: 128
+  dropout: 0.5
+
+pipeline:
+  center_ratio: 1.0

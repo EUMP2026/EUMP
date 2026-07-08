@@ -1,0 +1,8 @@
+# @package _global_
+
+data:
+  backend: eump_v1
+  eump_root: data/processed_v1
+  preprocessing_path: ${data.eump_root}/manifest/stats/preprocessing_v1.json
+  split_manifest_path: ${data.eump_root}/manifest/splits/legacy_compatible_seed42.json
+  runtime_split_manifest_path: null

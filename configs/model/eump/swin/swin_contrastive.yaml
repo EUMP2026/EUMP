@@ -1,0 +1,8 @@
+# @package _global_
+
+experiment:
+  pretrain_model: swin_L
+  scratch_backbone: false
+
+model:
+  kind: swin_contrastive

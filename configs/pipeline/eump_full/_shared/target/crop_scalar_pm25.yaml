@@ -1,0 +1,16 @@
+# @package _global_
+
+pipeline:
+  targets:
+    raster: []
+    scalar: []
+    crop_scalar:
+      - name: PM25_city_mean
+        source: PM25
+        source_kind: aux_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical

@@ -1,0 +1,21 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/swin_downstream
+  - /pipeline/eump_full/_shared/target/scalar_traffic
+  - _self_
+
+experiment:
+  group: eump_full_mae_v3
+  name: traffic
+
+downstream:
+  lr: 1e-4
+  batch_size: 128
+
+model:
+  scalar_hidden_dim: 128
+  dropout: 0.5
+
+pipeline:
+  center_ratio: 1.0

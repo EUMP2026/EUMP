@@ -1,0 +1,45 @@
+# @package _global_
+
+launch:
+  default_mode: all
+  train_modes:
+    all:
+      - lst
+      - precip
+      - pm25
+      - traffic
+    lst:
+      - lst
+    precip:
+      - precip
+    pm25:
+      - pm25
+    traffic:
+      - traffic
+  eval_modes:
+    all:
+      - lst
+      - precip
+      - pm25
+      - traffic
+    lst:
+      - lst
+    precip:
+      - precip
+    pm25:
+      - pm25
+    traffic:
+      - traffic
+  jobs:
+    lst:
+      kind: swin_downstream
+      pipeline: eump_full/mae_v3_one_stage/lst
+    precip:
+      kind: swin_downstream
+      pipeline: eump_full/mae_v3_one_stage/precip
+    pm25:
+      kind: swin_downstream
+      pipeline: eump_full/mae_v3_one_stage/pm25
+    traffic:
+      kind: swin_downstream
+      pipeline: eump_full/mae_v3_one_stage/traffic

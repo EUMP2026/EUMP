@@ -1,0 +1,89 @@
+# ========================
+# Data (repo root only)
+# ========================
+/data/
+/model/
+/tmp/
+/supplement_figs/
+/main_figs_v1/
+
+# ========================
+# Model weights and checkpoints
+# ========================
+*.pth
+*.pt
+*.bin
+*.ckpt
+*.safetensors
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ========================
+# Virtual environments
+# ========================
+venv/
+env/
+.env
+.venv/
+
+# ========================
+# Jupyter Notebook
+# ========================
+.ipynb_checkpoints/
+
+# ========================
+# Logs and outputs
+# ========================
+/log*
+logs/
+runs/
+output/
+outputs/
+*.log
+*.out
+*.err
+tensorboard/
+.local_sync/
+
+# ========================
+# Agent and session files
+# ========================
+.claude/
+script/local/analyze_grad_norm_debug.py
+SKILL.md
+MEMORY.md
+TODO_rebuild.md
+docs/.DS_Store
+docs/MEMORY.md
+docs/SKILL.md
+docs/TODO_rebuild.md
+docs/CLAUDE.md
+CLAUDE.md
+docs/channel_distribution_report/
+
+# ========================
+# System files
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ========================
+# IDE
+# ========================
+.vscode/
+.idea/
+*.swp
+*.swo

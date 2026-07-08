@@ -1,0 +1,22 @@
+data_name,mae_v3_role,years,train_samples,test_samples,resolution
+city_mask,input + reconstruction output + crop-scalar aux target (city_mask_crop_share),static,914 scenes,162 scenes,250m
+BH,input + reconstruction output + crop-scalar aux target (BH_city_positive_mean),static,914 scenes,162 scenes,250m
+BF,input + reconstruction output + crop-scalar aux target (BF_city_positive_mean),static,914 scenes,162 scenes,250m
+water,input + reconstruction output + crop-scalar aux target (water_city_share),static,914 scenes,162 scenes,250m
+DEM,input + reconstruction output + crop-scalar aux target (DEM_city_mean),static,914 scenes,162 scenes,250m
+LCZ,aux target (raster + crop-scalar aggregation: LCZ_city_distribution),static,914 scenes,162 scenes,250m
+NDVI,input + reconstruction output + crop-scalar aux target (NDVI_city_mean),2003-2020,16452 scene-years,2916 scene-years,500m
+NL,input + reconstruction output + crop-scalar aux target (NL_city_mean),2003-2020,16452 scene-years,2916 scene-years,1000m
+POP,input + reconstruction output + crop-scalar aux target (POP_city_positive_mean),2003-2020,16452 scene-years,2916 scene-years,250m
+LC,aux target (raster + crop-scalar aggregation: LC_city_distribution),2003-2020,16452 scene-years,2916 scene-years,500m
+GAIA,aux target (raster + crop-scalar aggregation: GAIA_city_positive_mean),2003-2018,14624 scene-years,2592 scene-years,250m
+road_density,aux target (raster + crop-scalar aggregation: road_density_city_share),2008-2020,11349 scene-years,2021 scene-years,250m
+Electricity,aux target (raster + crop-scalar aggregation: Electricity_city_mean),2003-2019,15538 scene-years,2754 scene-years,1000m
+GDP,aux target (raster + crop-scalar aggregation: GDP_city_positive_mean),"2,005,201,020,152,020",3656 scene-years,648 scene-years,1000m
+Ta,input + scalar reconstruction output,2003-2020,16452 scene-years,2916 scene-years,scalar
+precip_bg,input + scalar reconstruction output,2003-2020,16452 scene-years,2916 scene-years,scalar
+wind,input + scalar reconstruction output,2003-2020,16452 scene-years,2916 scene-years,scalar
+LST,downstream output,2003-2020,16452 scene-years,2916 scene-years,1000m
+precip,downstream output,2003-2020,16452 scene-years,2916 scene-years,4000m
+Traffic,downstream output,2017-2020,932 valid city-years,183 valid city-years,scalar
+PM25,downstream output,2015-2019,1463 valid city-years,265 valid city-years,scalar

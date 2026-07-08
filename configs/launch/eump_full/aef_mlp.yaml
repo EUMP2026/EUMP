@@ -1,0 +1,77 @@
+# @package _global_
+
+launch:
+  default_mode: all
+  train_modes:
+    all:
+      - cache
+      - lst
+      - precip
+      - pm25
+      - ghg
+      - traffic
+    aef-mlp-cache:
+      - cache
+    aef-mlp-lst:
+      - lst
+    aef-mlp-precip:
+      - precip
+    aef-mlp-pm25:
+      - pm25
+    aef-mlp-pm25-city:
+      - pm25
+    aef-mlp-ghg:
+      - ghg
+    aef-mlp-ghg-sum:
+      - ghg_sum
+    aef-mlp-traffic:
+      - traffic
+  eval_modes:
+    all:
+      - lst
+      - precip
+      - pm25
+      - ghg
+      - traffic
+    aef-mlp-lst:
+      - lst
+    aef-mlp-precip:
+      - precip
+    aef-mlp-pm25:
+      - pm25
+    aef-mlp-pm25-city:
+      - pm25
+    aef-mlp-ghg:
+      - ghg
+    aef-mlp-ghg-sum:
+      - ghg_sum
+    aef-mlp-traffic:
+      - traffic
+  jobs:
+    cache:
+      kind: city_scalar_cache
+      pipelines:
+        - eump_full/aef_mlp/lst
+        - eump_full/aef_mlp/precip
+        - eump_full/aef_mlp/pm25
+        - eump_full/aef_mlp/ghg
+        - eump_full/aef_mlp/ghg_sum
+        - eump_full/aef_mlp/traffic
+    lst:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/lst
+    precip:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/precip
+    pm25:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/pm25
+    ghg:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/ghg
+    ghg_sum:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/ghg_sum
+    traffic:
+      kind: city_scalar_mlp
+      pipeline: eump_full/aef_mlp/traffic

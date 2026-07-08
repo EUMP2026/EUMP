@@ -1,0 +1,8 @@
+# @package _global_
+
+model:
+  kind: city_scalar_mlp
+  mlp_hidden_dims:
+    - 128
+  dropout: 0.3
+  activation: gelu

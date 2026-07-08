@@ -1,0 +1,12 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_aef
+  - /pipeline/eump_full/_shared/target/crop_scalar_precip
+  - _self_
+
+experiment:
+  name: aef_mlp_precip
+
+downstream:
+  lr: 2.5e-3

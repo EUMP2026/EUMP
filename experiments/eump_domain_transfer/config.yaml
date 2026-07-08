@@ -1,0 +1,126 @@
+eump_domain_transfer:
+  run_name: eump_domain_transfer_mae_v3_city_classes_multi_transfer
+  label_csv: data/csv_data/city_classes.csv
+  output_root: experiments/eump_domain_transfer/outputs
+  pipeline_suite: eump_full/mae_v3
+  model_suites:
+    scalar_mlp: eump_full/scalar_mlp
+    aef_mlp: eump_full/aef_mlp
+  models:
+    - swin
+    - scalar_mlp
+    - aef_mlp
+  tasks:
+    - lst
+    - precip
+    - pm25
+    - traffic
+  source_checkpoint: eump_reconstruction_best_checkpoint.pt
+  metric_scale: physical
+  downstream_year_range:
+    - 2017
+    - 2020
+  ddp_timeout_seconds: 3600
+  model_init_stagger_seconds: 2.0
+  loader:
+    num_workers: 64
+    pin_memory: true
+    prefetch_factor: 2
+    persistent_workers: true
+  baselines:
+    feature_standardization: none
+  pretrain:
+    enabled: false
+    epochs: 200
+    lr: 1.0e-4
+    batch_size: 256
+    weight_decay: 1.0e-4
+    accumulation_steps: 1
+    grad_clip_norm: 1.0
+    mask_ratio: 0.6
+    scalar_head_mode: per_target
+    log_every_n_epochs: 1
+    scheduler:
+      warmup_fraction: 0.2
+      lr_start_factor: 0.1
+      lr_end_factor: 0.1
+  training:
+    epochs: 100
+    task_epochs:
+      lst: 100
+      precip: 50
+      pm25: 100
+      traffic: 50
+    model_task_epochs:
+      scalar_mlp:
+        precip: 100
+      aef_mlp:
+        precip: 100
+    task_dropout:
+      precip: 0.8
+      pm25: 0.8
+      traffic: 0.8
+    lr: 1.0e-4
+    batch_size: 64
+    weight_decay: 1.0e-2
+    accumulation_steps: 1
+    grad_clip_norm: 1.0
+    log_every_n_epochs: 1
+    scheduler:
+      warmup_fraction: 0.2
+      lr_start_factor: 0.1
+      lr_end_factor: 0.1
+  scenarios:
+    climate_acd_to_b:
+      column: climate_group
+      source:
+        - A
+        - C
+        - D
+      source_name: A+C+D
+      targets:
+        - B
+    gdp_nonpoor_to_poor:
+      column: gdp_class
+      source:
+        - Rich
+        - Medium
+      source_name: non-poor
+      targets:
+        - Poor
+    income_hic_lic_lmic_to_umic:
+      column: INCM_CMI
+      source:
+        - HIC
+        - LIC
+        - LMIC
+      source_name: HIC+LIC+LMIC
+      targets:
+        - UMIC
+    climate_abc_to_d:
+      column: climate_group
+      source:
+        - A
+        - B
+        - C
+      source_name: A+B+C
+      targets:
+        - D
+    climate_abd_to_c:
+      column: climate_group
+      source:
+        - A
+        - B
+        - D
+      source_name: A+B+D
+      targets:
+        - C
+    climate_bcd_to_a:
+      column: climate_group
+      source:
+        - B
+        - C
+        - D
+      source_name: B+C+D
+      targets:
+        - A

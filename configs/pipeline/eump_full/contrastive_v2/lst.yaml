@@ -1,0 +1,38 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/swin_downstream
+  - /pipeline/eump_full/_shared/target/raster_lst
+  - _self_
+
+experiment:
+  group: eump_full_contrastive_v2
+  name: lst
+
+downstream:
+  epochs: 100
+  lr: 5e-4
+  batch_size: 64
+  encoder_model_name: eump_full_contrastive_v2/pretrain
+  encoder_checkpoint_file: eump_contrastive_best_checkpoint.pt
+  selection:
+    metric: val_loss
+    metric_scale: physical
+    loss_view: default
+    center_ratio: 1.0
+    raster_view: global_pixels
+    smoothing_window: 1
+  scheduler:
+    warmup_fraction: 0.2
+    lr_start_factor: 0.1
+    lr_end_factor: 0.02
+
+model:
+  raster_head_type: progressive_upsample
+  raster_upsample_mode: nearest
+  raster_upsample_stages: 4
+  raster_min_channels: 48
+  dropout: 0.6
+
+pipeline:
+  center_ratio: 0.0

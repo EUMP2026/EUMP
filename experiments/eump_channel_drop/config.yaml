@@ -1,0 +1,98 @@
+channel_drop:
+  run_name: eump_mae_v3_channel_drop
+  base_pipeline_suite: eump_full/mae_v3
+  # Clean, already-trained mae_v3 artifacts. lst/precip eval loads these weights
+  # read-only (save_json=false); pm25/traffic reuse the pretrain encoder.
+  clean_group: eump_full_mae_v3
+  pretrain_model_name: eump_full_mae_v3/pretrain
+  encoder_checkpoint_file: eump_reconstruction_best_checkpoint.pt
+  downstream_checkpoint_file: eump_downstream_model.pt
+  default_tasks:
+    - lst
+    - precip
+    - pm25
+    - traffic
+  eval_splits:
+    - test
+  data_overrides:
+    - data=eump_full/server_v2
+  # Repeats re-run with different channel_drop.seed so we can report mean/std
+  # over random-drop draws. Several datasets are small, so 5 repeats gives a
+  # stability estimate. The summary reports a single-test row (first seed) and
+  # a multi-test aggregate (mean/std over all seeds). Baseline (drop disabled)
+  # is always added as the reference row.
+  repeats: 5
+  include_baseline: false
+  channel_drop:
+    min_drop: 1
+    max_drop: 2
+    base_seed: 12345
+    droppable_channels: null   # null = all 11 encoder input channels incl. city_mask
+  # Full-dataset ranges matching the eump_full_mae_v3 mainline (NOT the
+  # aef_compare restricted 2017-* ranges). lst/precip downstream and pretrain
+  # span 2003-2020; pm25 CV uses 2015-2019; traffic CV uses 2017-2020.
+  year_ranges:
+    default:
+      - 2003
+      - 2020
+    pm25:
+      - 2015
+      - 2019
+    traffic:
+      - 2017
+      - 2020
+  evaluation:
+    checkpoint_source: best_model
+    metric_scale: physical
+    center_ratio: 1.0
+  cv:
+    folds: 5
+    fold_seed: 42
+    embedding_batch_size: 64
+    workers_per_gpu: 4
+    torch_threads: 1
+    model_name: swin_embed_head_128_d05
+    head:
+      scalar_hidden_dim: 128
+      dropout: 0.5
+      lr: 1.0e-4
+      weight_decay: 1.0e-2
+      batch_size: 64
+      epochs: 80
+      loss: mae
+      selection_metric: val_loss
+  runner:
+    torch_sharing_strategy: file_system
+    master_addr: 127.0.0.1
+    master_port: 29501
+  # --- Channel-drop AUGMENTED TRAINING (train.py) ---
+  # Re-trains the 4 downstream tasks on top of the SAME frozen mae_v3 pretrain
+  # encoder, but with input_channel_drop enabled during head training, so the
+  # head learns to tolerate 1-2 missing input channels. Hyperparameters are
+  # copied verbatim from mae_v3 -- the ONLY difference vs the clean mainline is
+  # the channel-drop augmentation. Models are written to a dedicated group so
+  # the clean mae_v3 artifacts are never touched.
+  train:
+    # New experiment group for the drop-augmented models. Eval can point at this
+    # via `trained_group` below to compare against clean mae_v3 under drop.
+    trained_group: eump_full_mae_v3_channel_drop_trained
+    # Group for the CLEAN-arm CV models (pm25/traffic). The mainline
+    # eump_full_mae_v3 CV models are embedding-head type, which cannot be scored
+    # by the launcher eval-only path. To keep both arms symmetric, the clean arm
+    # re-trains launcher (end-to-end, NO drop) CV models into this dedicated
+    # group so the clean-vs-drop comparison uses one identical eval mechanism.
+    # The mainline eump_full_mae_v3 artifacts are never touched.
+    clean_cv_group: eump_full_mae_v3_clean_cv
+    # The frozen encoder all 4 heads load (unchanged mae_v3 pretrain). Required
+    # because the downstream profile resolves encoder_model_name from
+    # ${experiment.group}/pretrain, which would otherwise point at the new group.
+    encoder_model_name: eump_full_mae_v3/pretrain
+    # Single fixed seed for the drop draws during training (per-sample drop is
+    # still deterministic per (seed, scene, year, crop)).
+    train_seed: 12345
+    # lst/precip train once end-to-end; pm25/traffic train end-to-end per CV
+    # fold via the launcher path (no pooled-embedding cache).
+    cv_launch: eump_full/mae_v3
+  # Eval against drop-trained models instead of clean mae_v3. When null, eval
+  # uses clean_group (the mainline mae_v3, for the clean-vs-drop reference).
+  trained_group: eump_full_mae_v3_channel_drop_trained

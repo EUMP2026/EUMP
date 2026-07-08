@@ -1,0 +1,33 @@
+# @package _global_
+
+launch:
+  default_mode: all
+  train_modes:
+    all:
+      - pretrain
+      - lst
+      - precip
+    pretrain:
+      - pretrain
+    lst:
+      - lst
+    precip:
+      - precip
+  eval_modes:
+    all:
+      - lst
+      - precip
+    lst:
+      - lst
+    precip:
+      - precip
+  jobs:
+    pretrain:
+      kind: swin_pretrain
+      pipeline: eump_full/contrastive_v2/pretrain
+    lst:
+      kind: swin_downstream
+      pipeline: eump_full/contrastive_v2/lst
+    precip:
+      kind: swin_downstream
+      pipeline: eump_full/contrastive_v2/precip

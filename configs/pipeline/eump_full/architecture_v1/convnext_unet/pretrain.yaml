@@ -1,0 +1,46 @@
+# @package _global_
+#
+# ConvNeXt-UNet pretraining. Shares the mae_v3 data contract, differs in
+# encoder (ConvNeXt vs Swin) and decoder (UNet-style). Only input
+# reconstruction is supervised.
+
+defaults:
+  - /pipeline/eump_full/mae_v3/pretrain
+  - /model/eump/convnext/convnext_unet_reconstruction
+  - _self_
+
+experiment:
+  group: eump_full_architecture_v1_convnext_unet
+  name: pretrain
+
+pipeline:
+  aux_raster_target_weights:
+    LC: 0.0
+    LCZ: 0.0
+    GAIA: 0.0
+    PM25: 0.0
+    road_density: 0.0
+    Electricity: 0.0
+    GDP: 0.0
+  loss:
+    aux_weight: 0.0
+  targets:
+    raster: []
+    crop_scalar: []
+    input_reconstruction:
+      enabled: true
+      group: reconstruct
+      loss: mae
+      weight: 1.0
+      mask: valid_and_masked
+      scalar_sources: []
+      scalar_loss: ${.loss}
+      scalar_weight: ${.weight}
+      scalar_mask: valid
+      source_losses:
+        BF: mae
+        BH: mae
+        POP: mae
+        water: mae
+        city_mask: mae
+      source_weights: {}

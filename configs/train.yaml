@@ -1,0 +1,19 @@
+defaults:
+  - data: eump_full/server_v1
+  - pipeline: eump_full/mae_v2/pretrain
+  - _self_
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: ${hydra:runtime.cwd}/log/${experiment.group}/${experiment.name}/${now:%Y-%m-%d}/${now:%H-%M-%S}
+
+logging:
+  level: INFO
+  log_dir: null
+  progress_bar: False
+
+experiment:
+  random_seed: 42
+  center_ratio: 0.0

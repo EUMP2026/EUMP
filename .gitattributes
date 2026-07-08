@@ -1,0 +1,1 @@
+main_figs_v2/fig3/task12_fig3_package/data/embd/eump_reconstruction_best_checkpoint_embeddings_2003-2020_pooled_260503_v4.npz filter=lfs diff=lfs merge=lfs -text

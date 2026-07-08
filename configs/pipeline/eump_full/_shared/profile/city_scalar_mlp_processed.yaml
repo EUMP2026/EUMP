@@ -1,0 +1,72 @@
+# @package _global_
+
+experiment:
+  group: eump_full_baseline
+
+model:
+  kind: city_scalar_mlp
+  mlp_hidden_dims:
+    - 128
+  dropout: 0.3
+  activation: gelu
+
+downstream:
+  batch_size: 256
+  epochs: 100
+  accumulation_steps: 1
+  weight_decay: 1.0e-2
+  feature_standardization: train_split_zscore
+
+pipeline:
+  kind: eump_city_scalar_downstream
+  crop_size: 256
+  center_ratio: 1.0
+  broadcast_scalar: false
+  city_mask_source: city_mask
+  include_city_mask_as_input: false
+  year_range:
+    - 2003
+    - 2020
+  test_size: 0.3
+  num_workers: 4
+  cache_scenes: false
+  preload_scenes: false
+  pin_memory: true
+  prefetch_factor: 2
+  persistent_workers: true
+  city_scalar_cache:
+    enabled: true
+    rebuild: false
+    rebuild_features: null
+    rebuild_targets: null
+    num_workers: 4
+    batch_size: 1024
+    feature_source:
+      kind: processed_city_scalar
+  loss:
+    reconstruct_weight: 0.0
+    aux_weight: 1.0
+    group_reduction: weighted_mean
+    log_every_n_steps: 10
+    tensorboard: true
+  normalization:
+    source_stats_overrides:
+      BF: zero_excluded_stats
+      BH: zero_excluded_stats
+      POP: zero_excluded_stats
+  inputs:
+    sources:
+      - NDVI
+      - NL
+      - POP
+      - BH
+      - BF
+      - water
+      - DEM
+      - Ta
+      - precip_bg
+      - wind
+  targets:
+    raster: []
+    scalar: []
+    crop_scalar: []

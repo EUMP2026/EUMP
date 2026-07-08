@@ -1,0 +1,25 @@
+# Target city and year
+scene_id: "782"  # Beijing; override with --scene-id on the command line
+year: 2020       # override with --year on the command line
+
+# Perturbation settings
+source: NDVI
+delta: 0.1          # additive delta in physical units
+deltas: [0.1, 0.3, 0.5]  # used by --all-cities
+mask_scope: city    # "city" restricts perturbation to city_mask pixels; "all" uses all valid pixels
+min_value: null     # null uses source defaults: NDVI [-1, 1], POP [0, +inf]
+max_value: null     # null uses source defaults: NDVI [-1, 1], POP [0, +inf]
+
+# Evaluation split to search for the target scene_id + year
+# Use "train" or "val" if the city is not in the test split
+split: test
+
+# Model / checkpoint selection
+# These must match the pipeline= override used on the command line.
+# The script reads experiment.group, experiment.name, and evaluation.checkpoint_source
+# from the composed Hydra config; override them via Hydra overrides if needed.
+checkpoint_source: best_model  # "best_model" or "training_checkpoint"
+checkpoint_file: null
+
+# Output directory (relative to repo root)
+output_dir: experiments/manipulate_exp/outputs

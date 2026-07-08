@@ -1,0 +1,51 @@
+# @package _global_
+#
+# Swin-UNet pretraining: same encoder/data as mae_v3 but with a UNet-style
+# symmetric decoder. Only the input_reconstruction target is supervised; aux
+# raster and crop-scalar targets are disabled to keep the architecture
+# comparison clean.
+
+defaults:
+  - /pipeline/eump_full/mae_v3/pretrain
+  - /model/eump/swin/swin_unet_reconstruction
+  - _self_
+
+experiment:
+  group: eump_full_architecture_v1_swin_unet
+  name: pretrain
+
+reconstruct:
+  batch_size: 128
+  accumulation_steps: 2
+
+pipeline:
+  aux_raster_target_weights:
+    LC: 0.0
+    LCZ: 0.0
+    GAIA: 0.0
+    PM25: 0.0
+    road_density: 0.0
+    Electricity: 0.0
+    GDP: 0.0
+  loss:
+    aux_weight: 0.0
+  targets:
+    raster: []
+    crop_scalar: []
+    input_reconstruction:
+      enabled: true
+      group: reconstruct
+      loss: mae
+      weight: 1.0
+      mask: valid_and_masked
+      scalar_sources: []
+      scalar_loss: ${.loss}
+      scalar_weight: ${.weight}
+      scalar_mask: valid
+      source_losses:
+        BF: mae
+        BH: mae
+        POP: mae
+        water: mae
+        city_mask: mae
+      source_weights: {}

@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_aef
+  - /pipeline/eump_full/_shared/target/scalar_traffic
+  - _self_
+
+experiment:
+  name: aef_mlp_traffic
+
+downstream:
+  lr: 5e-4
+  batch_size: 64
+  epochs: 80
+
+model:
+  scalar_hidden_dim: 128
+  dropout: 0.5

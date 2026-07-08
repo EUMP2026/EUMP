@@ -1,0 +1,67 @@
+# @package _global_
+
+experiment:
+  group: eump_full_mae_v2
+  pretrain_model: swin_L
+
+model:
+  kind: swin_downstream_light
+  downstream_arch: light_dual_head
+  decoder_hidden_dim: 256
+  scalar_hidden_dim: 256
+  dropout: 0.1
+
+downstream:
+  batch_size: 256
+  epochs: 100
+  accumulation_steps: 1
+  weight_decay: 1.0e-2
+  encoder_source: reconstruction_checkpoint
+  encoder_checkpoint_file: eump_reconstruction_best_checkpoint.pt
+  encoder_model_name: ${experiment.group}/pretrain
+  freeze_encoder: true
+
+pipeline:
+  kind: eump_downstream
+  crop_size: 256
+  center_ratio: ${experiment.center_ratio}
+  broadcast_scalar: true
+  city_mask_source: city_mask
+  include_city_mask_as_input: true
+  year_range:
+    - 2003
+    - 2020
+  test_size: 0.3
+  num_workers: 64
+  cache_scenes: false
+  preload_scenes: false
+  pin_memory: true
+  prefetch_factor: 2
+  persistent_workers: true
+  loss:
+    reconstruct_weight: 0.0
+    aux_weight: 1.0
+    group_reduction: weighted_mean
+    log_every_n_steps: 10
+    tensorboard: true
+  normalization:
+    source_stats_overrides:
+      BF: zero_excluded_stats
+      BH: zero_excluded_stats
+      POP: zero_excluded_stats
+  inputs:
+    sources:
+      - NDVI
+      - NL
+      - POP
+      - BH
+      - BF
+      - water
+      - DEM
+      - Ta
+      - precip_bg
+      - wind
+  targets:
+    raster: []
+    scalar: []
+    crop_scalar: []
