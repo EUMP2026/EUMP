@@ -1,0 +1,62 @@
+channel_drop:
+  run_name: eump_mae_v3_channel_drop
+  base_pipeline_suite: eump_full/mae_v3
+  # Shared frozen MAE v3 encoder for downstream training and evaluation.
+  pretrain_model_name: eump_full_mae_v3/pretrain
+  default_tasks:
+    - lst
+    - precip
+    - pm25
+    - traffic
+  eval_splits:
+    - test
+  data_overrides:
+    - data=eump_full/server_v2
+  # Repeats re-run with different channel_drop.seed so we can report mean/std
+  # over random-drop draws. CV folds are averaged within each draw first.
+  # include_baseline optionally adds uncorrupted records to results.jsonl.
+  repeats: 5
+  include_baseline: false
+  channel_drop:
+    min_drop: 1
+    max_drop: 2
+    base_seed: 12345
+    droppable_channels: null   # null = all 11 encoder input channels incl. city_mask
+  # Full-dataset ranges matching the eump_full_mae_v3 mainline. lst/precip and pretrain
+  # span 2003-2020; pm25 CV uses 2015-2019; traffic CV uses 2017-2020.
+  year_ranges:
+    default:
+      - 2003
+      - 2020
+    pm25:
+      - 2015
+      - 2019
+    traffic:
+      - 2017
+      - 2020
+  evaluation:
+    checkpoint_source: best_model
+    metric_scale: physical
+    center_ratio: 1.0
+  cv:
+    folds: 5
+    fold_seed: 42
+  runner:
+    torch_sharing_strategy: file_system
+    master_addr: 127.0.0.1
+    master_port: 29501
+  # --- Channel-drop AUGMENTED TRAINING (train.py) ---
+  # Train downstream heads with input corruption and the frozen MAE v3 encoder.
+  train:
+    # Experiment group for the drop-augmented models.
+    trained_group: eump_full_mae_v3_channel_drop_trained
+    # The frozen encoder all 4 heads load (unchanged mae_v3 pretrain). Required
+    # because the downstream profile resolves encoder_model_name from
+    # ${experiment.group}/pretrain, which would otherwise point at the new group.
+    encoder_model_name: eump_full_mae_v3/pretrain
+    # Single fixed seed for the drop draws during training (per-sample drop is
+    # still deterministic per (seed, scene, year, crop)).
+    train_seed: 12345
+    # lst/precip train once; pm25/traffic train a head per CV fold through the
+    # launcher. The encoder stays frozen in every task.
+    cv_launch: eump_full/mae_v3

@@ -1,0 +1,13 @@
+# @package _global_
+
+pipeline:
+  targets:
+    raster: []
+    scalar:
+      - name: GHG_emission
+        source: GHG_emission
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+    crop_scalar: []

@@ -1,0 +1,28 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_processed
+  - /pipeline/eump_full/_shared/target/scalar_pm25_mean
+  - _self_
+
+experiment:
+  name: mlp_pm25
+
+downstream:
+  lr: 1e-4
+  batch_size: 64
+  epochs: 150
+  scheduler:
+    warmup_fraction: 0.2
+    lr_start_factor: 0.1
+    lr_end_factor: 0.1
+
+model:
+  mlp_hidden_dims:
+    - 128
+  dropout: 0.5
+
+pipeline:
+  year_range:
+    - 2015
+    - 2019

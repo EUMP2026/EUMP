@@ -1,0 +1,23 @@
+# Cross-planning LST evaluation with one-stage Swin and scratch ConvNeXt.
+# Both predictors evaluate the same unchanged planning intervention.
+cross_model_eval:
+  planning_data: experiments/planning_exp/outputs/joint_gradient_v2_292cities_traffic20pct/planning_data.pkl
+  output_dir: experiments/planning_cross_val_exp/outputs/cross_model_evaluation_lst_scratch
+  models:
+    one_stage_swin:
+      label: One-stage Swin
+      lst_pipeline: eump_full/mae_v3_one_stage/lst
+      lst_model_name: eump_ablation_v2_one_stage_swin_l_unfrozen/lst
+    convnext_one_stage_scratch:
+      label: ConvNeXt one-stage (scratch)
+      lst_pipeline: eump_full/architecture_v1/convnext_unet/lst
+      lst_model_name: planning_cross_val_exp_convnext_one_stage_scratch/lst
+      lst_overrides:
+        - model.backbone_kind=convnext
+        - model.depths=[3,3,27,3]
+        - model.dims=[192,384,768,1536]
+        - downstream.encoder_source=convnext_scratch
+        - downstream.encoder_model_name=null
+        - downstream.encoder_checkpoint_file=null
+        - +experiment.scratch_backbone=true
+        - downstream.freeze_encoder=false

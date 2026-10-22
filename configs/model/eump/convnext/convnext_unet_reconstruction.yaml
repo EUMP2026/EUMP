@@ -1,0 +1,13 @@
+# @package _global_
+
+experiment:
+  pretrain_model: convnext_l_placeholder
+  scratch_backbone: true
+
+model:
+  kind: convnext_unet_reconstruction
+  depths: [3, 3, 27, 3]
+  dims: [192, 384, 768, 1536]
+  drop_path_rate: 0.0
+  decoder_stages: 5
+  decoder_min_channels: 64

@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/architecture_v1/convnext_unet/traffic
+  - _self_
+
+experiment:
+  group: eump_full_convnext_one_stage
+
+downstream:
+  freeze_encoder: false
+  lr: 1e-4
+  epochs: 50
+  batch_size: 32
+
+model:
+  backbone_drop_path_rate: 0.0
+  dropout: 0.5

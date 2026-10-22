@@ -1,0 +1,13 @@
+# @package _global_
+
+experiment:
+  pretrain_model: swin_T
+  scratch_backbone: false
+
+model:
+  kind: swin_downstream_light
+  downstream_arch: light_dual_head
+  decoder_hidden_dim: 256
+  scalar_hidden_dim: 256
+  dropout: 0.1
+

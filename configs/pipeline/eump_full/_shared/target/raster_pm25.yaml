@@ -1,0 +1,13 @@
+# @package _global_
+
+pipeline:
+  targets:
+    raster:
+      - name: PM25
+        source: PM25
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid_and_masked
+    scalar: []
+    crop_scalar: []

@@ -1,0 +1,17 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_processed
+  - /pipeline/eump_full/_shared/target/scalar_ghg_mean
+  - _self_
+
+experiment:
+  name: mlp_ghg
+
+downstream:
+  lr: 2.5e-4
+  batch_size: 128
+
+model:
+  scalar_hidden_dim: 128
+  dropout: 0.5

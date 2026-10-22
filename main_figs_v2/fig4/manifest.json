@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "cities": [
+    782,
+    339,
+    216,
+    475,
+    261
+  ],
+  "year": 2020,
+  "sources": {
+    "joint": {
+      "path": "experiments/planning_exp/outputs/joint_gradient_v2_5cities_current/planning_data.pkl",
+      "sha256": "e230456614158931b352f2a4da5f1aa207711e4a6e24854d505e8579d3147518"
+    },
+    "cooling_only": {
+      "path": "experiments/planning_exp/outputs/cooling_only_5cities_1000steps/planning_data.pkl",
+      "sha256": "a549ceff9b8b86967f425cc6eb9a0d043ee45df9e707374385f84bd5b59898b6"
+    }
+  },
+  "shared_baselines_match": true,
+  "metric_rows": 10,
+  "metrics_source": "fig4.prepare_differences raster arrays; equal-city scenario means"
+}

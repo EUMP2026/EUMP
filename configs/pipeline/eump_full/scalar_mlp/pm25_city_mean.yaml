@@ -1,0 +1,23 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_processed
+  - /pipeline/eump_full/_shared/target/crop_scalar_pm25
+  - _self_
+
+experiment:
+  name: mlp_pm25_city_mean
+
+downstream:
+  lr: 5e-4
+  batch_size: 128
+
+model:
+  mlp_hidden_dims:
+    - 128
+  dropout: 0.5
+
+pipeline:
+  year_range:
+    - 2017
+    - 2020

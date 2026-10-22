@@ -1,0 +1,18 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/city_scalar_mlp_processed
+  - /pipeline/eump_full/_shared/target/scalar_traffic
+  - _self_
+
+experiment:
+  name: mlp_traffic
+
+downstream:
+  lr: 5e-4
+  batch_size: 64
+
+model:
+  mlp_hidden_dims:
+    - 128
+  dropout: 0.5

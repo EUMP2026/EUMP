@@ -1,0 +1,17 @@
+rank,variable,csv_var,kind,n_years,rmax_mean,rmax_std,rmax_min,rmax_max,r2_mean,r2_std
+1,Wind Speed,SPEED,dynamic,18,0.9278,0.0043,0.9195,0.9348,0.9831,0.0011
+2,TA,TLML,dynamic,18,0.8545,0.0057,0.8446,0.8686,0.9868,0.0008
+3,PREC,PRECTOTCORR,dynamic,18,0.8095,0.03,0.7633,0.8753,0.9823,0.0039
+4,NL,NL,dynamic,18,0.7615,0.0246,0.7185,0.789,0.921,0.0185
+5,AREA,zone_area_km2,static,1,0.7356,0.0,0.7356,0.7356,0.9068,0.0
+6,NDVI,NDVI,dynamic,18,0.7287,0.0085,0.7126,0.7453,0.9089,0.005
+7,Elevation,DEM,static,1,0.7087,0.0,0.7087,0.7087,0.84,0.0
+8,ISA,GAIA,dynamic,16,0.6881,0.0116,0.6663,0.7024,0.7385,0.0234
+9,ELEC_total,Electricity_sum,dynamic,17,0.6445,0.0053,0.6352,0.6541,0.7078,0.0128
+10,POP_total,POP_sum,dynamic,18,0.6397,0.0131,0.6227,0.6629,0.8028,0.0132
+11,POP_density,POP_mean,dynamic,18,0.6354,0.0093,0.6199,0.6513,0.6674,0.0192
+12,GDP_total,GDP_sum,dynamic,4,0.6162,0.0202,0.5941,0.6484,0.7568,0.0428
+13,BF,BF,static,1,0.5887,0.0,0.5887,0.5887,0.708,0.0
+14,BH,BH_mean,static,1,0.5502,0.0,0.5502,0.5502,0.6915,0.0
+15,ELEC_density,Electricity_mean,dynamic,17,0.5479,0.0173,0.5272,0.5873,0.6577,0.0124
+16,GDP_density,GDP_mean,dynamic,4,0.4908,0.0226,0.4767,0.5299,0.5291,0.0478

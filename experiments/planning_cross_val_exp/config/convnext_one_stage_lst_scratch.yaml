@@ -1,0 +1,21 @@
+# Scratch end-to-end ConvNeXt LST training.
+# The encoder is randomly initialized and is jointly optimized with the LST head.
+base_pipeline: eump_full/architecture_v1/convnext_unet/lst
+overrides:
+  model.kind: swin_downstream_light
+  model.backbone_kind: convnext
+  model.depths: [3, 3, 27, 3]
+  model.dims: [192, 384, 768, 1536]
+  +model.backbone_drop_path_rate: 0.3
+  model.dropout: 0.5
+  +experiment.scratch_backbone: true
+  experiment.group: planning_cross_val_exp_convnext_one_stage_scratch
+  experiment.name: lst
+  downstream.encoder_source: convnext_scratch
+  downstream.encoder_model_name: null
+  downstream.encoder_checkpoint_file: null
+  downstream.freeze_encoder: false
+  downstream.lr: 1.0e-4
+  downstream.batch_size: 32
+  downstream.epochs: 50
+  pipeline.center_ratio: 0.0

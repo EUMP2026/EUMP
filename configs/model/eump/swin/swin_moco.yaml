@@ -1,0 +1,9 @@
+# @package _global_
+
+experiment:
+  pretrain_model: swin_L
+  scratch_backbone: false
+
+model:
+  kind: swin_moco
+  momentum: 0.996

@@ -1,0 +1,80 @@
+eump_domain_transfer:
+  # Source-only MAE reconstruction pretraining, followed by downstream heads.
+  # config.yaml retains the separate global-encoder/downstream-only protocol.
+  run_name: eump_domain_transfer_mae_v3_source_pretrain_climate_tropic_gdp_poor
+  label_csv: data/csv_data/city_classes.csv
+  output_root: experiments/eump_domain_transfer/outputs
+  data_overrides:
+    - data=eump_full/server_v2
+  pipeline_suite: eump_full/mae_v3
+  models:
+    - swin
+  tasks:
+    - lst
+    - precip
+    - pm25
+    - traffic
+  source_checkpoint: eump_reconstruction_best_checkpoint.pt
+  metric_scale: physical
+  downstream_year_range:
+    - 2017
+    - 2020
+  ddp_timeout_seconds: 3600
+  model_init_stagger_seconds: 2.0
+  loader:
+    num_workers: 64
+    pin_memory: true
+    prefetch_factor: 2
+    persistent_workers: true
+  baselines:
+    feature_standardization: none
+  pretrain:
+    enabled: true
+    epochs: 200
+    lr: 1.0e-4
+    batch_size: 256
+    weight_decay: 1.0e-4
+    accumulation_steps: 1
+    grad_clip_norm: 1.0
+    mask_ratio: 0.6
+    scalar_head_mode: per_target
+    log_every_n_epochs: 1
+    scheduler:
+      warmup_fraction: 0.2
+      lr_start_factor: 0.1
+      lr_end_factor: 0.1
+  training:
+    epochs: 100
+    task_epochs:
+      lst: 100
+      precip: 50
+      pm25: 100
+      traffic: 50
+    lr: 1.0e-4
+    batch_size: 64
+    weight_decay: 1.0e-2
+    accumulation_steps: 1
+    grad_clip_norm: 1.0
+    log_every_n_epochs: 1
+    scheduler:
+      warmup_fraction: 0.2
+      lr_start_factor: 0.1
+      lr_end_factor: 0.1
+  scenarios:
+    climate_bcd_to_a:
+      column: climate_group
+      source:
+        - B
+        - C
+        - D
+      source_name: B+C+D
+      targets:
+        - A
+    gdp_nonpoor_to_poor:
+      column: gdp_class
+      source:
+        - Rich
+        - Medium
+      source_name: non-poor
+      targets:
+        - Poor

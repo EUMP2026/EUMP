@@ -1,0 +1,77 @@
+# @package _global_
+#
+# MoCo-style contrastive pretraining with Swin-L and a momentum encoder.
+
+defaults:
+  - /model/eump/swin/swin_moco
+  - _self_
+
+experiment:
+  group: eump_full_contrastive_v2
+  name: pretrain
+  pretrain_model: swin_L
+  scratch_backbone: false
+  center_ratio: 0.0
+
+contrastive:
+  lr: 1e-4
+  weight_decay: 5e-2
+  batch_size: 128
+  # Default budget; the reported comparison uses the epoch-31 checkpoint.
+  epochs: 100
+  scheduler_epochs: 100
+  accumulation_steps: 1
+  save_file: eump_contrastive_model.pt
+  checkpoint_file: eump_contrastive_checkpoint.pt
+  best_checkpoint_file: eump_contrastive_best_checkpoint.pt
+  save_best_model: false
+  save_best_checkpoint: true
+  save_final_model: true
+  checkpoint_every_n_epochs: 10
+  resume: false
+  resume_checkpoint: null
+  mask_ratio: 0.6
+  temperature: 0.2
+  momentum: 0.996
+  projection_hidden_dim: 2048
+  projection_dim: 128
+  channel_dropout_p: 0.2
+  noise_std: 0.03
+  scheduler:
+    warmup_fraction: 0.1
+    lr_start_factor: 0.1
+    lr_end_factor: 0.02
+
+pipeline:
+  kind: eump_contrastive
+  crop_size: 256
+  center_ratio: ${experiment.center_ratio}
+  broadcast_scalar: true
+  city_mask_source: city_mask
+  include_city_mask_as_input: true
+  year_range:
+    - 2003
+    - 2020
+  test_size: 0.3
+  num_workers: 64
+  cache_scenes: false
+  preload_scenes: false
+  pin_memory: true
+  prefetch_factor: 2
+  persistent_workers: true
+  inputs:
+    sources:
+      - NDVI
+      - NL
+      - POP
+      - BH
+      - BF
+      - water
+      - DEM
+      - Ta
+      - precip_bg
+      - wind
+  targets:
+    raster: []
+    scalar: []
+    crop_scalar: []

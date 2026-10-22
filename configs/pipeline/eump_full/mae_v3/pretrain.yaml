@@ -1,0 +1,368 @@
+# @package _global_
+
+experiment:
+  group: eump_full_mae_v3
+  name: pretrain
+  pretrain_model: swin_L
+
+model:
+  kind: swin_reconstruction
+
+reconstruct:
+  lr: 1e-4
+  weight_decay: 1.0e-4
+  save_file: eump_reconstruction_model.pt
+  checkpoint_file: eump_reconstruction_checkpoint.pt
+  resume: false
+  resume_checkpoint: null
+  mask_ratio: 0.6
+  save_best_model: false
+  save_best_checkpoint: true
+  best_checkpoint_file: eump_reconstruction_best_checkpoint.pt
+  save_final_model: true
+  checkpoint_every_n_epochs: 10
+  scheduler:
+    lr_start_factor: 0.1
+    lr_end_factor: 0.1
+  batch_size: 256
+  epochs: 200
+  accumulation_steps: 1
+  scalar_head_mode: per_target
+  debug_grad_norm:
+    enabled: false
+    every_n_steps: 10
+    parameter_scope: backbone
+
+pipeline:
+  kind: eump_reconstruction
+  crop_size: 256
+  center_ratio: ${experiment.center_ratio}
+  broadcast_scalar: true
+  city_mask_source: city_mask
+  include_city_mask_as_input: true
+  year_range:
+    - 2003
+    - 2020
+  test_size: 0.3
+  num_workers: 64
+  cache_scenes: false
+  preload_scenes: false
+  pin_memory: true
+  prefetch_factor: 2
+  persistent_workers: true
+  loss:
+    reconstruct_weight: 1.0
+    aux_weight: 0.25
+    group_reduction: weighted_mean
+    reconstruct_reduction: source_weighted_mean
+    aux_reduction: source_weighted_mean
+    hurdle_reduction: weighted_mean
+    hurdle_cls_weight: 1.0
+    hurdle_reg_weight: 1.0
+    log_every_n_steps: 10
+    tensorboard: true
+    aux_source_weights:
+      PM25: 0.0
+  aux_raster_target_weights:
+    LC: 1.0
+    LCZ: 1.0
+    GAIA: 1.0
+    PM25: 0.0
+    road_density: 1.0
+    Electricity: 1.0
+    GDP: 1.0
+  normalization:
+    hurdle_stats_key: zero_excluded_stats
+  inputs:
+    sources:
+      - NDVI
+      - NL
+      - POP
+      - BH
+      - BF
+      - water
+      - DEM
+      - Ta
+      - precip_bg
+      - wind
+  targets:
+    input_reconstruction:
+      enabled: true
+      group: reconstruct
+      loss: mae
+      weight: 1.0
+      mask: valid_and_masked
+      scalar_sources:
+        - Ta
+        - precip_bg
+        - wind
+      scalar_loss: ${.loss}
+      scalar_weight: ${.weight}
+      scalar_mask: valid
+      source_losses:
+        BF: hurdle_mae
+        BH: hurdle_mae
+        POP: hurdle_mae
+        water: bce
+        city_mask: bce
+      source_weights:
+        Ta: 0.0
+        precip_bg: 0.0
+        wind: 0.0
+    raster:
+      - name: LC
+        source: LC
+        group: aux
+        loss: ce
+        weight: ${pipeline.aux_raster_target_weights.LC}
+        mask: valid_and_masked
+        optional: true
+      - name: LCZ
+        source: LCZ
+        group: aux
+        loss: ce
+        weight: ${pipeline.aux_raster_target_weights.LCZ}
+        mask: valid_and_masked
+        optional: true
+      - name: GAIA
+        source: GAIA
+        group: aux
+        loss: hurdle_mae
+        weight: ${pipeline.aux_raster_target_weights.GAIA}
+        mask: valid_and_masked
+        optional: true
+      - name: PM25
+        source: PM25
+        group: aux
+        loss: mae
+        weight: ${pipeline.aux_raster_target_weights.PM25}
+        mask: valid_and_masked
+        optional: true
+      - name: road_density
+        source: road_density
+        group: aux
+        loss: bce
+        weight: ${pipeline.aux_raster_target_weights.road_density}
+        mask: valid_and_masked
+        optional: true
+      - name: Electricity
+        source: Electricity
+        group: aux
+        loss: mae
+        weight: ${pipeline.aux_raster_target_weights.Electricity}
+        mask: valid_and_masked
+        optional: true
+      - name: GDP
+        source: GDP
+        group: aux
+        loss: hurdle_mae
+        weight: ${pipeline.aux_raster_target_weights.GDP}
+        mask: valid_and_masked
+        optional: true
+    crop_scalar:
+      - name: NDVI_city_mean
+        source: NDVI
+        source_kind: dynamic_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+      - name: NL_city_mean
+        source: NL
+        source_kind: dynamic_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+      - name: POP_city_positive_share
+        source: POP
+        source_kind: dynamic_raster
+        group: aux
+        loss: bce
+        weight: 0.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        value_transform: positive_indicator
+      - name: POP_city_positive_mean
+        source: POP
+        source_kind: dynamic_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        normalization_scope: zero_excluded
+        positive_only: true
+      - name: BH_city_positive_share
+        source: BH
+        source_kind: static_raster
+        group: aux
+        loss: bce
+        weight: 0.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        value_transform: positive_indicator
+      - name: BH_city_positive_mean
+        source: BH
+        source_kind: static_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        normalization_scope: zero_excluded
+        positive_only: true
+      - name: BF_city_positive_share
+        source: BF
+        source_kind: static_raster
+        group: aux
+        loss: bce
+        weight: 0.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        value_transform: positive_indicator
+      - name: BF_city_positive_mean
+        source: BF
+        source_kind: static_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        normalization_scope: zero_excluded
+        positive_only: true
+      - name: DEM_city_mean
+        source: DEM
+        source_kind: static_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+      - name: water_city_share
+        source: water
+        source_kind: static_raster
+        group: aux
+        loss: bce
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+      - name: city_mask_crop_share
+        source: city_mask
+        source_kind: city_mask
+        group: aux
+        loss: bce
+        weight: 1.0
+        mask: valid
+        use_city_mask: false
+        output_names:
+          - city_mask_crop_share
+        aggregation_scale: physical
+      - name: LC_city_distribution
+        source: LC
+        source_kind: aux_raster
+        group: aux
+        loss: kl
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        optional: true
+      - name: LCZ_city_distribution
+        source: LCZ
+        source_kind: aux_raster
+        group: aux
+        loss: kl
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        optional: true
+      - name: GAIA_city_positive_share
+        source: GAIA
+        source_kind: aux_raster
+        group: aux
+        loss: bce
+        weight: 0.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        value_transform: positive_indicator
+        optional: true
+      - name: GAIA_city_positive_mean
+        source: GAIA
+        source_kind: aux_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        normalization_scope: zero_excluded
+        positive_only: true
+        optional: true
+      - name: PM25_city_mean
+        source: PM25
+        source_kind: aux_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        optional: true
+      - name: road_density_city_share
+        source: road_density
+        source_kind: aux_raster
+        group: aux
+        loss: bce
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        optional: true
+      - name: Electricity_city_mean
+        source: Electricity
+        source_kind: aux_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        optional: true
+      - name: GDP_city_positive_share
+        source: GDP
+        source_kind: aux_raster
+        group: aux
+        loss: bce
+        weight: 0.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        value_transform: positive_indicator
+        optional: true
+      - name: GDP_city_positive_mean
+        source: GDP
+        source_kind: aux_raster
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid
+        min_city_mask_coverage: 0.03
+        aggregation_scale: physical
+        normalization_scope: zero_excluded
+        positive_only: true
+        optional: true

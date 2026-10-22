@@ -1,0 +1,59 @@
+planning_exp:
+  mode: joint  # "joint" | "cooling_only" | "both"
+  cities: [782, 339, 216, 475, 261]
+  year: 2020
+  split: test
+
+  optimization:
+    epochs: 1000
+    lr: 0.001
+    # v2 joint policy: the summed LST+Traffic loss updates both channels.
+    # Use "source_separated" only when reproducing the historical v1 line.
+    gradient_mode: joint
+    use_sign_step: true
+    use_adamw_step: true  # true => add AdamW update using masked raw gradients
+    adamw_lr_multiplier: 5.0  # AdamW lr = actual step lr * this multiplier
+    weight_decay: 0  # only used when use_adamw_step is true
+
+  loss:
+    scale_pixel_loss: 5.0
+    scale_traffic_loss: 15.0
+    lambda_reg_lst: 10.0
+    lambda_one_sided: 1000.0
+    lambda_reg_tr: 100.0
+    lambda_pop_sum: 1.0e-7
+
+  targets:
+    lst_delta_base: 1.0
+    lst_delta_pop_scale: 0
+    lst_delta_pop_weighting: linear  # "linear" | "log10p"; log10p uses log10(1 + pop)
+    lst_target_region: city  # "all" | "city"; city computes LST pixel loss only inside city_mask
+    lst_delta_normalize_city_mean: true  # true => city mean target cooling equals lst_delta_base
+    traffic_delta: 0.2
+    traffic_delta_mode: percent  # "absolute" | "percent"; percent uses 0.1 = 10% drop
+
+  update_channels:
+    lst_step: NDVI
+    traffic_step: POP
+
+  cooling_only:
+    epochs: null  # null = use optimization.epochs
+    lr: null  # null = use optimization.lr
+
+  data_export:
+    enabled: true
+    data_file: planning_data.pkl
+
+  outputs:
+    save_city_npz: true
+
+  lst_pipeline: eump_full/mae_v3/lst
+  checkpoint_source: best_model
+
+  # Traffic head: loaded from a specific CV fold checkpoint
+  traffic_cv:
+    checkpoint: model/eump_full_mae_v3/traffic_cv/swin_embed_head_128_d05_fold2/swin_embedding_scalar_head.pt
+    hidden_dim: 128
+    dropout: 0.5
+
+  output_dir: experiments/planning_exp/outputs

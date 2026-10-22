@@ -1,0 +1,93 @@
+aef_compare:
+  run_name: eump_aef_compare_mae_v3_aef
+  ours_group: eump_aef_compare_mae_v3
+  one_stage_group: eump_aef_compare_one_stage_swin_l_unfrozen
+  aef_group: eump_aef_compare_aef
+  scalar_mlp_group: eump_aef_compare_scalar_mlp
+  traffic_cv_group: eump_aef_compare_traffic_cv
+  pm25_cv_group: eump_aef_compare_pm25_cv
+  one_stage_traffic_cv_group: eump_aef_compare_traffic_cv_one_stage
+  one_stage_pm25_cv_group: eump_aef_compare_pm25_cv_one_stage
+  aef_traffic_cv_group: eump_aef_compare_traffic_cv_aef
+  aef_pm25_cv_group: eump_aef_compare_pm25_cv_aef
+  scalar_mlp_traffic_cv_group: eump_aef_compare_traffic_cv_scalar_mlp
+  scalar_mlp_pm25_cv_group: eump_aef_compare_pm25_cv_scalar_mlp
+  ours_launch: eump_full/mae_v3
+  one_stage_launch: eump_full/mae_v3_one_stage
+  one_stage_model_name: one_stage_swin_l_unfrozen
+  one_stage_pretrain_model: swin_L
+  one_stage_scratch_backbone: false
+  aef_launch: eump_full/aef_mlp
+  scalar_mlp_launch: eump_full/scalar_mlp
+  base_pipeline_suite: eump_full/mae_v3
+  data_overrides:
+    - data=eump_full/server_v2
+  pretrain_model_name: eump_full_mae_v3/pretrain
+  encoder_checkpoint_file: eump_reconstruction_best_checkpoint.pt
+  default_methods:
+    - ours
+    - one_stage
+    - aef
+    - scalar_mlp
+  default_tasks:
+    - lst
+    - precip
+    - traffic
+    - pm25
+  eval_splits:
+    - test
+  year_ranges:
+    default:
+      - 2017
+      - 2020
+    pm25:
+      - 2017
+      - 2019
+  evaluation:
+    checkpoint_source: best_model
+    metric_scale: physical
+    center_ratio: 1.0
+  cv:
+    folds: 5
+    fold_seed: 42
+    traffic_run_name: traffic_cv_mae_v3_seed42
+    pm25_run_name: pm25_cv_mae_v3_seed42
+    embedding_batch_size: 64
+    workers_per_gpu: 4
+    torch_threads: 1
+    head:
+      scalar_hidden_dim: 128
+      dropout: 0.5
+      lr: 1.0e-4
+      weight_decay: 1.0e-2
+      batch_size: 64
+      epochs: 80
+      loss: mae
+      selection_metric: val_loss
+    aef:
+      mlp_hidden_dims:
+        - 128
+      dropout: 0.5
+      feature_standardization: none
+    scalar_mlp:
+      mlp_hidden_dims:
+        - 128
+      dropout: 0.5
+      feature_standardization: feature_cache_train_split
+  runner:
+    torch_sharing_strategy: file_system
+    master_addr: 127.0.0.1
+    master_port: 29500
+    eval_master_port: 29501
+  smoke:
+    run_name_suffix: smoke
+    epochs: 1
+    batch_size: 8
+    num_workers: 0
+    pin_memory: false
+    persistent_workers: false
+    prefetch_factor: 2
+    cv_folds: 2
+    cv_epochs: 1
+    cv_batch_size: 8
+    cv_embedding_batch_size: 8

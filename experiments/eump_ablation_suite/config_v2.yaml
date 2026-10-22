@@ -1,0 +1,201 @@
+ablation_suite:
+  run_name: eump_ablation_v2_full
+  experiment_group_prefix: eump_ablation_v2
+  base_pipeline_suite: eump_full/mae_v3
+  base_pretrain_aux_weight: 0.25
+  default_families:
+    - center1_noaux
+    - comparison
+    - input_groups
+    - one_stage
+    - architecture
+  default_tasks:
+    - lst
+    - precip
+    - traffic
+    - pm25
+  default_eval_splits:
+    - val
+    - test
+  data_overrides:
+    - data=eump_full/server_v2
+  encoder_checkpoint_file: eump_reconstruction_best_checkpoint.pt
+  traffic_cv:
+    folds: 5
+    fold_seed: 42
+    run_name: traffic_cv_seed42
+    model_name: swin_embed_head_128_d05
+    embedding_years:
+      - 2017
+      - 2020
+    embedding_batch_size: 128
+    workers_per_gpu: 4
+    torch_threads: 1
+    head:
+      scalar_hidden_dim: 128
+      dropout: 0.5
+      lr: 5.0e-4
+      weight_decay: 1.0e-2
+      batch_size: 128
+      epochs: 100
+      loss: mae
+      selection_metric: val_loss
+  pm25_cv:
+    folds: 5
+    fold_seed: 42
+    run_name: pm25_cv_seed42
+    model_name: swin_embed_head_128_d05
+    target_name: PM25_mean
+    target_pipeline: eump_full/mae_v3/pm25
+    embedding_years:
+      - 2015
+      - 2019
+    embedding_batch_size: 128
+    workers_per_gpu: 4
+    torch_threads: 1
+    head:
+      scalar_hidden_dim: 128
+      dropout: 0.5
+      lr: 1.0e-4
+      weight_decay: 1.0e-2
+      batch_size: 128
+      epochs: 80
+      loss: mae
+      selection_metric: val_loss
+  evaluation:
+    checkpoint_source: best_model
+    metric_scale: physical
+    center_ratio: 1.0
+  runner:
+    torch_sharing_strategy: file_system
+    master_addr: 127.0.0.1
+    master_port: 29500
+    eval_master_port: 29501
+  smoke:
+    run_name_suffix: smoke
+    epochs: 1
+    pretrain_batch_size: 8
+    downstream_batch_size: 8
+    downstream_selection_smoothing_window: 1
+    num_workers: 0
+    pin_memory: false
+    persistent_workers: false
+    prefetch_factor: 2
+    traffic_cv_folds: 2
+    traffic_cv_epochs: 1
+    traffic_cv_batch_size: 8
+    traffic_cv_embedding_batch_size: 8
+    scene_counts:
+      train: 2
+      val: 1
+      test: 1
+  families:
+    center1_noaux:
+      description: Center crop training without aux, varying mask ratio.
+      variants:
+        center1_mask0_noaux:
+          center_ratio: 1.0
+          mask_ratio: 0.0
+          no_aux: true
+        center1_mask20_noaux:
+          center_ratio: 1.0
+          mask_ratio: 0.2
+          no_aux: true
+        center1_mask40_noaux:
+          center_ratio: 1.0
+          mask_ratio: 0.4
+          no_aux: true
+        center1_mask60_noaux:
+          center_ratio: 1.0
+          mask_ratio: 0.6
+          no_aux: true
+        center1_mask80_noaux:
+          center_ratio: 1.0
+          mask_ratio: 0.8
+          no_aux: true
+    comparison:
+      description: >-
+        Baseline anchors. `noaux`, `swin_t`, and `scratch_init` are trained
+        in-suite; `mae_v3` is reference-only (reference_group: eump_full_mae_v3),
+        collected from the existing main baseline group rather than retrained here.
+      variants:
+        noaux:
+          no_aux: true
+        swin_t:
+          pretrain_model: swin_T
+          experiment_group: eump_ablation_v2_reuse_pretrain_swin_t
+        scratch_init:
+          pretrain_model: swin_L
+          scratch_backbone: true
+          experiment_group: eump_ablation_v2_reuse_pretrain_scratch_init
+        mae_v3:
+          reference_group: eump_full_mae_v3
+    one_stage:
+      description: One-stage supervised downstream baseline. Skips MAE pretrain and uses CV for traffic and pm25.
+      default_tasks:
+        - lst
+        - precip
+        - pm25
+        - traffic
+      variants:
+        swin_l_unfrozen:
+          one_stage: true
+          pipeline_suite: eump_full/mae_v3_one_stage
+          pretrain_model: swin_L
+          scratch_backbone: false
+          traffic_cv: true
+          pm25_cv: true
+    architecture:
+      description: >-
+        Architecture and pretrain-objective comparison. Reference-only: this
+        suite does not pretrain/evaluate these variants. They are trained by the
+        separate experiments/eump_architecture_ablation experiment (groups
+        eump_full_architecture_v1_* / eump_full_contrastive_*); here run.py only
+        re-collects their existing metrics via reference_group during collect.
+      default_tasks:
+        - lst
+        - precip
+        - traffic
+        - pm25
+      variants:
+        swin_unet:
+          reference_group: eump_full_architecture_v1_swin_unet
+          cv_run_name_suffix: mae_v3_seed42
+          traffic_cv: true
+          pm25_cv: true
+        convnext_unet:
+          reference_group: eump_full_architecture_v1_convnext_unet
+          expected_backbone: convnext
+          cv_run_name_suffix: mae_v3_seed42
+          traffic_cv: true
+          pm25_cv: true
+        moco:
+          reference_group: eump_full_contrastive_v2
+          cv_run_name_suffix: mae_v3_seed42
+          traffic_cv: true
+          pm25_cv: true
+    input_groups:
+      description: Progressive input-channel groups.
+      variants:
+        group_1:
+          no_aux: true
+          inputs:
+            sources: [NDVI, POP]
+            include_city_mask_as_input: false
+        group_2:
+          no_aux: true
+          inputs:
+            sources: [NDVI, NL, POP]
+            include_city_mask_as_input: false
+        group_3:
+          no_aux: true
+          inputs:
+            sources: [NDVI, NL, POP, water, DEM]
+            include_city_mask_as_input: true
+        group_4:
+          no_aux: true
+          inputs:
+            sources: [NDVI, NL, POP, BH, BF, water, DEM]
+            include_city_mask_as_input: true
+        group_5:
+          no_aux: true

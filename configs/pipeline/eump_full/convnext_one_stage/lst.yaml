@@ -1,0 +1,22 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/architecture_v1/convnext_unet/lst
+  - _self_
+
+experiment:
+  group: eump_full_convnext_one_stage
+  name: lst
+
+downstream:
+  freeze_encoder: false
+  lr: 1e-4
+  epochs: 50
+  batch_size: 32
+
+model:
+  backbone_drop_path_rate: 0.3
+  dropout: 0.5
+
+pipeline:
+  center_ratio: 0.0

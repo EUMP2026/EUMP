@@ -1,0 +1,10 @@
+# @package _global_
+
+experiment:
+  pretrain_model: swin_L
+  scratch_backbone: false
+
+model:
+  kind: swin_unet_reconstruction
+  decoder_stages: 5
+  decoder_min_channels: 64

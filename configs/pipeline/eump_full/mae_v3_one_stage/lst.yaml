@@ -1,0 +1,29 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/mae_v3/lst
+  - _self_
+
+experiment:
+  group: eump_full_mae_v3_one_stage
+  pretrain_model: swin_L
+
+downstream:
+  encoder_source: swin_pretrained
+  encoder_model_name: null
+  encoder_checkpoint_file: null
+  freeze_encoder: false
+
+model:
+  backbone_hidden_dropout_prob: 0.3
+  backbone_attention_probs_dropout_prob: 0.3
+
+pipeline:
+  targets:
+    raster:
+      - name: LST
+        source: LST
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid

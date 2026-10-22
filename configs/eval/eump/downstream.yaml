@@ -1,0 +1,10 @@
+# @package _global_
+
+evaluation:
+  split: test
+  metric_scale: physical
+  center_ratio: 1.0
+  checkpoint_source: best_model
+  checkpoint_file: null
+  save_json: true
+  extra_center_city_mean: false

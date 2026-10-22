@@ -1,0 +1,14 @@
+# @package _global_
+
+pipeline:
+  targets:
+    raster:
+      - name: LST
+        source: LST
+        group: aux
+        loss: mae
+        weight: 1.0
+        mask: valid_and_masked
+        city_weight: 10.0
+    scalar: []
+    crop_scalar: []

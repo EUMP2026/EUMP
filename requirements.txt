@@ -1,0 +1,33 @@
+# Runtime dependencies for Python 3.12.
+# PyTorch's Linux x86-64 wheels declare their CUDA 12.4 runtime dependencies.
+torch==2.6.0
+torchvision==0.21.0
+
+# Backbone loading: keep the compatible Transformers 4.x dependency versions.
+transformers==4.50.3
+huggingface-hub==0.30.1
+tokenizers==0.21.1
+safetensors==0.5.3
+
+# Configuration, logging, and training progress.
+hydra-core==1.3.2
+omegaconf==2.3.0
+PyYAML==6.0.2
+loguru==0.7.2
+tqdm==4.67.1
+tensorboard==2.19.0
+
+# Numerical processing, evaluation, and plotting.
+numpy==2.2.4
+pandas==2.2.3
+scipy==1.15.2
+scikit-learn==1.6.1
+matplotlib==3.10.1
+pillow==11.1.0
+
+# Scene-store processing and geographic figures (Zarr v2 format).
+zarr==2.18.7
+numcodecs==0.15.1
+rasterio==1.4.3
+geopandas==1.1.3
+cartopy==0.25.0

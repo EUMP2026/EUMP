@@ -1,0 +1,26 @@
+# @package _global_
+
+defaults:
+  - /pipeline/eump_full/_shared/profile/swin_downstream
+  - /pipeline/eump_full/_shared/target/crop_scalar_precip
+  - _self_
+
+experiment:
+  group: eump_full_architecture_v1_swin_unet
+  name: precip
+
+downstream:
+  lr: 5e-4
+  batch_size: 128
+  encoder_model_name: eump_full_architecture_v1_swin_unet/pretrain
+  scheduler:
+    warmup_fraction: 0.2
+    lr_start_factor: 0.1
+    lr_end_factor: 0.1
+
+model:
+  scalar_hidden_dim: 256
+  dropout: 0.5
+
+pipeline:
+  center_ratio: 1.0

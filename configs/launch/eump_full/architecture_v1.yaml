@@ -1,0 +1,70 @@
+# @package _global_
+#
+# Launch suite for the architecture_v1 ablation. Pretrain uses the variant
+# subdirectory (swin_unet or convnext_unet); downstream tasks point at the
+# corresponding pretrain group via their pipeline configs.
+
+launch:
+  default_mode: all
+  train_modes:
+    all:
+      - swin_unet_pretrain
+      - swin_unet_lst
+      - swin_unet_precip
+      - convnext_unet_pretrain
+      - convnext_unet_lst
+      - convnext_unet_precip
+    swin-unet:
+      - swin_unet_pretrain
+      - swin_unet_lst
+      - swin_unet_precip
+    convnext-unet:
+      - convnext_unet_pretrain
+      - convnext_unet_lst
+      - convnext_unet_precip
+    pretrain:
+      - swin_unet_pretrain
+      - convnext_unet_pretrain
+    lst:
+      - swin_unet_lst
+      - convnext_unet_lst
+    precip:
+      - swin_unet_precip
+      - convnext_unet_precip
+  eval_modes:
+    all:
+      - swin_unet_lst
+      - swin_unet_precip
+      - convnext_unet_lst
+      - convnext_unet_precip
+    swin-unet:
+      - swin_unet_lst
+      - swin_unet_precip
+    convnext-unet:
+      - convnext_unet_lst
+      - convnext_unet_precip
+    lst:
+      - swin_unet_lst
+      - convnext_unet_lst
+    precip:
+      - swin_unet_precip
+      - convnext_unet_precip
+  jobs:
+    swin_unet_pretrain:
+      kind: swin_pretrain
+      pipeline: eump_full/architecture_v1/swin_unet/pretrain
+    swin_unet_lst:
+      kind: swin_downstream
+      pipeline: eump_full/architecture_v1/swin_unet/lst
+    swin_unet_precip:
+      kind: swin_downstream
+      pipeline: eump_full/architecture_v1/swin_unet/precip
+    convnext_unet_pretrain:
+      kind: swin_pretrain
+      pipeline: eump_full/architecture_v1/convnext_unet/pretrain
+    convnext_unet_lst:
+      kind: swin_downstream
+      pipeline: eump_full/architecture_v1/convnext_unet/lst
+    convnext_unet_precip:
+      kind: swin_downstream
+      pipeline: eump_full/architecture_v1/convnext_unet/precip
