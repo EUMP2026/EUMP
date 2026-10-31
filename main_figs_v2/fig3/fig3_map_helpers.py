@@ -8,14 +8,15 @@ Layout (3 rows x 2 cols):
     d  (row2, left)    FORM physical clustering map (BF, BH_mean, BH_QCD)
     e  (row2, right)   FORM embedding clustering map
 
-Objective: render the held-out test-city assignments from the discovery-fitted
-Task 11 analyses together with the held-out correlation summary in fig3.py.
-Inputs: packaged Task 11 held-out label/selection/metric CSVs and local
-world/city shapefiles.
+Objective: provide the held-out Task 11 cluster assignments and map helpers
+used by the main_figs_v2/fig3 renderer.
+Inputs: the correlation, Task 11 held-out label/selection/metric CSVs, and
+world/city shapefiles packaged under this figure directory.
 The four maps share each typology's test-city cohort. No fitting takes place
 in this figure script. Ocean is white as in the original figure.
 """
 
+from collections import Counter
 from pathlib import Path
 import warnings
 
@@ -25,32 +26,38 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import matplotlib.lines as mlines
 
 import geopandas as gpd
 import cartopy.crs as ccrs
 from cartopy.feature import ShapelyFeature
 
 # ----------------------------------------------------------------------------
-# Paths (all inputs are packaged beside this module)
+# Paths (package root = parent of code/)
 # ----------------------------------------------------------------------------
-
+# %% [1] Paths, style, and fixed panel-a configuration
 try:
     ROOT = Path(__file__).resolve().parent
 except NameError:
-    ROOT = Path.cwd()
+    ROOT = Path.cwd() if Path.cwd().name != "code" else Path.cwd().parent
 
+TASK06_DIR  = ROOT / "data" / "task06_all"
 TASK11_DIR  = ROOT / "data" / "task11_heldout"
 COUNTRY_SHP = ROOT / "data" / "shp" / "world_map_v2.shp"
 GHSL_SHP    = ROOT / "data" / "shp" / "GHSL_filtered_v1.shp"
+OUT_DIR     = ROOT / "output"
+OUT_DIR.mkdir(parents=True, exist_ok=True)
+OUT_STEM    = OUT_DIR / "fig3_v2_no_a_v2_heldout"
 
 # ----------------------------------------------------------------------------
 # Style
 # ----------------------------------------------------------------------------
 def _register_arial():
-    """Use installed Arial, otherwise Matplotlib-provided DejaVu Sans."""
+    """Use Arial when installed, then the metric-compatible Liberation Sans fallback."""
     from matplotlib import font_manager as fm
-    if any(f.name == "Arial" for f in fm.fontManager.ttflist):
-        return "Arial"
+    for name in ("Arial", "Liberation Sans"):
+        if any(f.name == name for f in fm.fontManager.ttflist):
+            return name
     return "DejaVu Sans"
 
 
@@ -104,13 +111,13 @@ DIM_BOX_Y_PAD = 0.034
 # ============================================================================
 # Summary panel — top-|R| summary (errorbars / diamonds + dim blocks)
 # ============================================================================
-# Panel-a configuration used by fig3.py
+# %% [2] Panel a: unchanged from fig3_v2_no_a_v1.py
 
 
 # ============================================================================
 # Map panels — clustering (env / form) + world maps
 # ============================================================================
-# Load discovery-fitted held-out cluster assignments
+# %% [3] Load discovery-fitted held-out cluster assignments
 ENV_NAMES = {
     0: "C1: Dim, Green, Mid-pop",
     1: "C2: Bright, Green, Low-pop",
@@ -177,7 +184,7 @@ def prepare_form():
 
 
 # Geo basemap (loaded once, reused for all four maps).
-# Draw held-out maps
+# %% [4] Draw held-out maps and export the composite
 _DATA_CRS = ccrs.PlateCarree()
 _PROJ = ccrs.Robinson(central_longitude=0)
 
